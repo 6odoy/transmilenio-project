@@ -8,6 +8,10 @@ dependencies:
   - loguru
   - tqdm
   - polars
+  - matplotlib
+  - seaborn
+  - jupyter
+  - jupyterlab
   - ruff
   - pip:
     - python-dotenv
