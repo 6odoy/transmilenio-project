@@ -76,10 +76,13 @@ def ingest_raw_data() -> list[Path]:
 
 def process_raw_data(csv_path: Path, output_path: Path) -> Path:
     """
-    Limpia, agrega y persiste un CSV individual como parquet.
-    - Elimina la columna 'Dispositivo'
+    Limpia, agrega, transforma y persiste un CSV individual como parquet.
+    - Elimina columnas innecesarias (Dispositivo, Acceso_Estacion, Linea)
     - Crea columna timestamp (Fecha + Tiempo)
     - Agrupa por fecha, hora y estación sumando entradas/salidas
+    - Extrae fecha y hora del timestamp
+    - Extrae código y nombre de la estación
+    - Calcula total de validaciones (entradas + salidas)
     - Guarda el resultado en parquet
     """
     if output_path.exists():
@@ -120,6 +123,26 @@ def process_raw_data(csv_path: Path, output_path: Path) -> Path:
             pl.col("timestamp").first(),
         )
         .sort(GROUP_KEYS)
+    )
+
+    # --- Transformación final ---
+    df = (
+        df
+        .drop("Fecha_Transaccion", "Tiempo")
+        .drop("Acceso_Estacion", "Linea")
+        .rename({
+            "Entradas_E": "entradas",
+            "Salidas_S": "salidas",
+        })
+        .with_columns(
+            pl.col("timestamp").dt.date().alias("fecha"),
+            pl.col("timestamp").dt.time().alias("hora"),
+            pl.col("Estacion").str.extract(r"\((\d+)\)", group_index=1).alias("codigo").cast(pl.Int64),
+            pl.col("Estacion").str.extract(r"\)(.+)", group_index=1).alias("nombre"),
+            (pl.col("entradas") + pl.col("salidas")).alias("total"),
+        )
+        .drop("timestamp", "Estacion")
+        .select(["fecha", "hora", "codigo", "nombre", "entradas", "salidas", "total"])
     )
 
     # --- Persistencia ---
