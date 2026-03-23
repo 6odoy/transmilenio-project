@@ -27,11 +27,17 @@ COLUMNS_TO_KEEP = [
     "Tiempo",
     "Linea",
     "Estacion",
-    "Acceso_Estacion",
     "Entradas_E",
     "Salidas_S",
 ]
 GROUP_KEYS = ["Fecha_Transaccion", "Tiempo", "Estacion"]
+
+FINAL_COLUMNS = [
+    "timestamp", "fecha", "hora",
+    "codigo_linea", "nombre_linea",
+    "codigo_estacion", "nombre_estacion",
+    "entradas", "salidas", "total",
+]
 
 
 # ======================================
@@ -76,48 +82,46 @@ def ingest_raw_data() -> list[Path]:
 
 def process_raw_data(csv_path: Path, output_path: Path) -> Path:
     """
-    Limpia, agrega, transforma y persiste un CSV individual como parquet.
-    - Elimina columnas innecesarias (Dispositivo, Acceso_Estacion, Linea)
-    - Crea columna timestamp (Fecha + Tiempo)
-    - Agrupa por fecha, hora y estación sumando entradas/salidas
-    - Extrae fecha y hora del timestamp
-    - Extrae código y nombre de la estación
-    - Calcula total de validaciones (entradas + salidas)
-    - Guarda el resultado en parquet
+    Limpia, agrega, transforma y persiste un CSV individual como Parquet.
+
+    Etapas:
+      1. Carga y selección de columnas útiles
+      2. Tipado de columnas numéricas y creación de timestamp
+      3. Agregación por fecha + hora + estación
+      4. Extracción de código/nombre de estación y línea
+      5. Correcciones de reglas de negocio (Intermedias San Mateo)
+      6. Renombrar columnas (entradas, salidas)
+      7. Consolidación de variantes de San Mateo
+      8. Normalización de texto (titlecase, acentos, Cabecera→Portal)
+      9. Selección final y persistencia en Parquet
     """
     if output_path.exists():
         logger.debug(f"Parquet ya existe, saltando: {output_path.name}")
         return output_path
 
-    # --- Limpieza ---
     logger.debug(f"Procesando: {csv_path.name}")
-    df = pl.read_csv(csv_path, try_parse_dates=False, infer_schema_length=5000)
 
-    # Seleccionar solo columnas útiles (elimina 'Dispositivo')
+    # 1. Carga y selección de columnas ─────────────────────────────
+    df = pl.read_csv(csv_path, try_parse_dates=False, infer_schema_length=5000)
     df = df.select(COLUMNS_TO_KEEP)
 
-    # Tipar columnas numéricas
+    # 2. Tipado y timestamp ────────────────────────────────────────
     df = df.with_columns(
         pl.col("Entradas_E").cast(pl.Int64),
         pl.col("Salidas_S").cast(pl.Int64),
-    )
-
-    # Crear timestamp combinando Fecha_Transaccion + Tiempo
-    df = df.with_columns(
         pl.concat_str(
             [pl.col("Fecha_Transaccion"), pl.col("Tiempo")],
             separator=" ",
         )
         .str.to_datetime("%Y-%m-%d %H:%M:%S", strict=False)
-        .alias("timestamp")
+        .alias("timestamp"),
     )
 
-    # --- Agregación por fecha + hora + estación ---
+    # 3. Agregación por fecha + hora + estación ────────────────────
     df = (
         df.group_by(GROUP_KEYS)
         .agg(
             pl.col("Linea").first(),
-            pl.col("Acceso_Estacion").first(),
             pl.col("Entradas_E").sum(),
             pl.col("Salidas_S").sum(),
             pl.col("timestamp").first(),
@@ -125,27 +129,102 @@ def process_raw_data(csv_path: Path, output_path: Path) -> Path:
         .sort(GROUP_KEYS)
     )
 
-    # --- Transformación final ---
-    df = (
-        df
-        .drop("Fecha_Transaccion", "Tiempo")
-        .drop("Acceso_Estacion", "Linea")
-        .rename({
-            "Entradas_E": "entradas",
-            "Salidas_S": "salidas",
-        })
-        .with_columns(
-            pl.col("timestamp").dt.date().alias("fecha"),
-            pl.col("timestamp").dt.time().alias("hora"),
-            pl.col("Estacion").str.extract(r"\((\d+)\)", group_index=1).alias("codigo").cast(pl.Int64),
-            pl.col("Estacion").str.extract(r"\)(.+)", group_index=1).alias("nombre"),
-            (pl.col("entradas") + pl.col("salidas")).alias("total"),
-        )
-        .drop("timestamp", "Estacion")
-        .select(["fecha", "hora", "codigo", "nombre", "entradas", "salidas", "total"])
+    # 4. Extracción de campos derivados ────────────────────────────
+    #    Patrón de Estacion/Linea: "(código)nombre"
+    df = df.with_columns(
+        # Fechas
+        pl.col("timestamp").dt.date().alias("fecha"),
+        pl.col("timestamp").dt.time().alias("hora"),
+        # Estación
+        pl.col("Estacion").str.extract(r"\((\d+)\)", group_index=1)
+            .cast(pl.Int64).alias("codigo_estacion"),
+        pl.col("Estacion").str.extract(r"\)(.+)", group_index=1)
+            .alias("nombre_estacion"),
+        # Línea
+        pl.col("Linea").str.extract(r"\((\d+)\)", group_index=1)
+            .cast(pl.Int64).alias("codigo_linea"),
+        pl.col("Linea").str.extract(r"\)(.+)", group_index=1)
+            .alias("nombre_linea"),
+        # Validaciones
+        (pl.col("Entradas_E") + pl.col("Salidas_S")).alias("total"),
     )
 
-    # --- Persistencia ---
+    # 5. Correcciones de reglas de negocio ─────────────────────────
+    #    "Intermedias San Mateo" de la línea ficticia "Line for Intermedium Gate"
+    #    corresponde realmente a la zona G NQS Sur / San Mateo.
+    es_intermedias = (
+        (pl.col("nombre_linea") == "Line for Intermedium Gate")
+    )
+    df = df.with_columns(
+        pl.when(es_intermedias)
+            .then(pl.lit("Zona G NQS Sur"))
+            .otherwise(pl.col("nombre_linea"))
+            .alias("nombre_linea")
+    )
+
+    # 6. Renombrar columnas ──────────────────────────────────────────
+    df = df.rename({
+        "Entradas_E": "entradas",
+        "Salidas_S": "salidas",
+    })
+
+    # 7. Consolidación de variantes de San Mateo ──────────────────
+    #    Todas las variantes cuyo nombre termina en "San Mateo" se
+    #    consolidan bajo "SAN MATEO - C.C. UNISUR", sumando conteos.
+    san_mateo_variantes = df.filter(
+        pl.col("nombre_estacion").str.contains(r".*San Mateo$")
+    )
+    san_mateo_unisur = df.filter(
+        pl.col("nombre_estacion") == "SAN MATEO - C.C. UNISUR"
+    )
+    san_mateo_agg = san_mateo_variantes.group_by("timestamp").agg(
+        pl.col("entradas").sum(),
+        pl.col("salidas").sum(),
+        pl.col("total").sum(),
+    )
+    resultado = (
+        san_mateo_unisur
+        .join(san_mateo_agg, on="timestamp", how="left", suffix="_var")
+        .with_columns(
+            (pl.col("entradas") + pl.col("entradas_var")).alias("entradas"),
+            (pl.col("salidas") + pl.col("salidas_var")).alias("salidas"),
+            (pl.col("total") + pl.col("total_var")).alias("total"),
+        )
+        .drop("entradas_var", "salidas_var", "total_var")
+    )
+    df = df.filter(
+        ~pl.col("nombre_estacion").str.contains(r".*San Mateo$")
+        & (pl.col("nombre_estacion") != "SAN MATEO - C.C. UNISUR")
+    ).vstack(resultado)
+
+    # 8. Normalización de texto ────────────────────────────────────
+    #    Titlecase, strip, eliminar acentos, y "Cabecera" → "Portal".
+    df = (
+        df.with_columns(
+            pl.col("nombre_linea", "nombre_estacion")
+                .str.to_titlecase()
+                .str.strip_chars()
+                .str.replace_all(r"[áàâä]", "a")
+                .str.replace_all(r"[éèêë]", "e")
+                .str.replace_all(r"[íìîï]", "i")
+                .str.replace_all(r"[óòôö]", "o")
+                .str.replace_all(r"[úùûü]", "u")
+                .str.replace_all(r"[ñ]", "n")
+                .str.replace_all(r"[Á]", "A")
+                .str.replace_all(r"[É]", "E")
+                .str.replace_all(r"[Í]", "I")
+                .str.replace_all(r"[Ó]", "O")
+                .str.replace_all(r"[Ú]", "U")
+                .str.replace_all(r"[Ñ]", "N")
+        )
+        .with_columns(
+            pl.col("nombre_estacion").str.replace(r"^Cabecera", "Portal")
+        )
+    )
+
+    # 9. Selección final y persistencia ────────────────────────────
+    df = df.select(FINAL_COLUMNS)
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     df.write_parquet(output_path)
     logger.info(f"Guardado: {output_path.name} ({len(df)} filas)")
