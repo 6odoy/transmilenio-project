@@ -7,7 +7,7 @@ name = "transmilenio_project"
 version = "0.0.1"
 description = "later"
 authors = [
-  { name = "Andr\u00e9s Escobar - Lis S\u00e1nchez" },
+  { name = "Andres Escobar - Lis Sanchez" },
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
