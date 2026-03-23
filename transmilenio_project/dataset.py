@@ -1,3 +1,4 @@
+import json
 import re
 import zipfile
 from pathlib import Path
@@ -34,8 +35,8 @@ GROUP_KEYS = ["Fecha_Transaccion", "Tiempo", "Estacion"]
 
 FINAL_COLUMNS = [
     "timestamp", "fecha", "hora",
-    "codigo_linea", "nombre_linea",
-    "codigo_estacion", "nombre_estacion",
+    "codigo_linea",
+    "codigo_estacion",
     "entradas", "salidas", "total",
 ]
 
@@ -80,7 +81,7 @@ def ingest_raw_data() -> list[Path]:
 # ======================================
 
 
-def process_raw_data(csv_path: Path, output_path: Path) -> Path:
+def process_raw_data(csv_path: Path, output_path: Path) -> tuple[Path, pl.DataFrame | None, pl.DataFrame | None]:
     """
     Limpia, agrega, transforma y persiste un CSV individual como Parquet.
 
@@ -96,8 +97,17 @@ def process_raw_data(csv_path: Path, output_path: Path) -> Path:
       9. Selección final y persistencia en Parquet
     """
     if output_path.exists():
+        schema = pl.read_parquet_schema(output_path)
+        if "nombre_linea" in schema:
+            logger.info(f"Convirtiendo parquet existente al nuevo esquema: {output_path.name}")
+            df = pl.read_parquet(output_path)
+            df_linea_counts = df.select(["codigo_linea", "nombre_linea"]).group_by(["codigo_linea", "nombre_linea"]).len()
+            df_estacion_counts = df.select(["codigo_estacion", "nombre_estacion"]).group_by(["codigo_estacion", "nombre_estacion"]).len()
+            df.select(FINAL_COLUMNS).write_parquet(output_path)
+            return output_path, df_linea_counts, df_estacion_counts
+            
         logger.debug(f"Parquet ya existe, saltando: {output_path.name}")
-        return output_path
+        return output_path, None, None
 
     logger.debug(f"Procesando: {csv_path.name}")
 
@@ -168,33 +178,63 @@ def process_raw_data(csv_path: Path, output_path: Path) -> Path:
         "Salidas_S": "salidas",
     })
 
-    # 7. Consolidación de variantes de San Mateo ──────────────────
-    #    Todas las variantes cuyo nombre termina en "San Mateo" se
-    #    consolidan bajo "SAN MATEO - C.C. UNISUR", sumando conteos.
-    san_mateo_variantes = df.filter(
-        pl.col("nombre_estacion").str.contains(r".*San Mateo$")
-    )
-    san_mateo_unisur = df.filter(
-        pl.col("nombre_estacion") == "SAN MATEO - C.C. UNISUR"
-    )
-    san_mateo_agg = san_mateo_variantes.group_by("timestamp").agg(
-        pl.col("entradas").sum(),
-        pl.col("salidas").sum(),
-        pl.col("total").sum(),
-    )
-    resultado = (
-        san_mateo_unisur
-        .join(san_mateo_agg, on="timestamp", how="left", suffix="_var")
+    # 7. Consolidación de variantes ───────────────────────────────
+    #    Mapa de códigos de estaciones variantes -> código principal
+    variantes_map = {
+        40004: 40003,
+        50002: 9100,
+        50003: 9001,
+        50008: 6000,
+        57503: 7503,
+        59503: 7503,
+        9129:  9113,
+        9125:  9119,
+        9124:  9115,
+    }
+
+    variantes_codigos = list(variantes_map.keys())
+
+    # Separar variantes del resto
+    variantes = df.filter(pl.col("codigo_estacion").is_in(variantes_codigos))
+
+    # Agregar variantes mapeando al código principal
+    variantes_agg = (
+        variantes
         .with_columns(
-            (pl.col("entradas") + pl.col("entradas_var")).alias("entradas"),
-            (pl.col("salidas") + pl.col("salidas_var")).alias("salidas"),
-            (pl.col("total") + pl.col("total_var")).alias("total"),
+            pl.col("codigo_estacion").replace(variantes_map).alias("codigo_principal")
+        )
+        .group_by(["timestamp", "codigo_principal"])
+        .agg(
+            pl.col("entradas").sum(),
+            pl.col("salidas").sum(),
+            pl.col("total").sum(),
+        )
+    )
+
+    # Join con los registros principales y sumar
+    principales = df.filter(pl.col("codigo_estacion").is_in(list(variantes_map.values())))
+
+    resultado = (
+        principales
+        .join(
+            variantes_agg,
+            left_on=["timestamp", "codigo_estacion"],
+            right_on=["timestamp", "codigo_principal"],
+            how="left",
+            suffix="_var"
+        )
+        .with_columns(
+            (pl.col("entradas") + pl.col("entradas_var").fill_null(0)).alias("entradas"),
+            (pl.col("salidas") + pl.col("salidas_var").fill_null(0)).alias("salidas"),
+            (pl.col("total") + pl.col("total_var").fill_null(0)).alias("total"),
         )
         .drop("entradas_var", "salidas_var", "total_var")
     )
+
+    # Reconstruir el df
     df = df.filter(
-        ~pl.col("nombre_estacion").str.contains(r".*San Mateo$")
-        & (pl.col("nombre_estacion") != "SAN MATEO - C.C. UNISUR")
+        ~pl.col("codigo_estacion").is_in(variantes_codigos) &
+        ~pl.col("codigo_estacion").is_in(list(variantes_map.values()))
     ).vstack(resultado)
 
     # 8. Normalización de texto ────────────────────────────────────
@@ -222,13 +262,16 @@ def process_raw_data(csv_path: Path, output_path: Path) -> Path:
         )
     )
 
+    df_linea_counts = df.select(["codigo_linea", "nombre_linea"]).group_by(["codigo_linea", "nombre_linea"]).len()
+    df_estacion_counts = df.select(["codigo_estacion", "nombre_estacion"]).group_by(["codigo_estacion", "nombre_estacion"]).len()
+
     # 9. Selección final y persistencia ────────────────────────────
     df = df.select(FINAL_COLUMNS)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     df.write_parquet(output_path)
     logger.info(f"Guardado: {output_path.name} ({len(df)} filas)")
-    return output_path
+    return output_path, df_linea_counts, df_estacion_counts
 
 
 # ======================================
@@ -253,19 +296,83 @@ def run_data_pipeline() -> list[Path]:
     # 2. Procesamiento
     PARQUET_DIR.mkdir(parents=True, exist_ok=True)
     parquet_files: list[Path] = []
+    
+    all_df_linea = []
+    all_df_estacion = []
 
     for csv_path in tqdm(csv_files, desc="Procesando CSVs"):
         out = PARQUET_DIR / csv_path.with_suffix(".parquet").name
         try:
-            pq = process_raw_data(csv_path, out)
+            pq, df_linea, df_estacion = process_raw_data(csv_path, out)
             parquet_files.append(pq)
+            if df_linea is not None:
+                all_df_linea.append(df_linea)
+            if df_estacion is not None:
+                all_df_estacion.append(df_estacion)
         except Exception as e:
             logger.error(f"Error procesando {csv_path.name}: {e}")
+
+    if all_df_linea and all_df_estacion:
+        _update_dimensions(all_df_linea, all_df_estacion)
 
     logger.success(
         f"========== PIPELINE COMPLETO: {len(parquet_files)} parquets =========="
     )
     return parquet_files
+
+def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[pl.DataFrame]):
+    logger.info("Actualizando dimensiones (JSONs)")
+    df_lineas_concat = pl.concat(all_df_linea)
+    df_estaciones_concat = pl.concat(all_df_estacion)
+
+    df_lineas_agg = (
+        df_lineas_concat.group_by(["codigo_linea", "nombre_linea"]).sum()
+        .sort(["len"], descending=True)
+        .unique(subset=["codigo_linea"], keep="first")
+        .sort("codigo_linea")
+    )
+    df_estaciones_agg = (
+        df_estaciones_concat.group_by(["codigo_estacion", "nombre_estacion"]).sum()
+        .sort(["len"], descending=True)
+        .unique(subset=["codigo_estacion"], keep="first")
+        .sort("codigo_estacion")
+    )
+
+    dim_linea = {
+        str(row["codigo_linea"]): row["nombre_linea"] 
+        for row in df_lineas_agg.to_dicts()
+    }
+    dim_estacion = {
+        str(row["codigo_estacion"]): row["nombre_estacion"] 
+        for row in df_estaciones_agg.to_dicts()
+    }
+
+    path_dim_linea = PROCESSED_DATA_DIR / "dim_linea.json"
+    path_dim_estacion = PROCESSED_DATA_DIR / "dim_estacion.json"
+    
+    if path_dim_linea.exists():
+        try:
+            with open(path_dim_linea, "r", encoding="utf-8") as f:
+                old_dim_linea = json.load(f)
+                dim_linea = {**old_dim_linea, **dim_linea}
+        except Exception as e:
+            logger.warning(f"No se pudo leer {path_dim_linea.name}: {e}")
+            
+    if path_dim_estacion.exists():
+        try:
+            with open(path_dim_estacion, "r", encoding="utf-8") as f:
+                old_dim_estacion = json.load(f)
+                dim_estacion = {**old_dim_estacion, **dim_estacion}
+        except Exception as e:
+            logger.warning(f"No se pudo leer {path_dim_estacion.name}: {e}")
+            
+    with open(path_dim_linea, "w", encoding="utf-8") as f:
+        json.dump(dim_linea, f, ensure_ascii=False, indent=2)
+        
+    with open(path_dim_estacion, "w", encoding="utf-8") as f:
+        json.dump(dim_estacion, f, ensure_ascii=False, indent=2)
+        
+    logger.info("Dimensiones guardadas en JSON exitosamente.")
 
 
 # =======================
