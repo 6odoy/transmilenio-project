@@ -5,6 +5,7 @@ from pathlib import Path
 from urllib.request import urlopen, urlretrieve
 
 import polars as pl
+import geopandas as gpd
 from loguru import logger
 from tqdm import tqdm
 import typer
@@ -22,6 +23,9 @@ BASE_URL = "https://storage.googleapis.com/validaciones_tmsa/Salidas/"
 ZIP_DIR = RAW_DATA_DIR / "zips"
 CSV_DIR = RAW_DATA_DIR / "csv"
 PARQUET_DIR = PROCESSED_DATA_DIR / "parquet"
+GEOJSON_URL = "https://opendata.arcgis.com/datasets/5365d814bbdd4062a59234eea7d70db7_1.geojson"
+GEOJSON_PATH = RAW_DATA_DIR / "stations.geojson"
+CLEAN_GEOJSON_PATH = PROCESSED_DATA_DIR / "stations_clean.geojson"
 
 COLUMNS_TO_KEEP = [
     "Fecha_Transaccion",
@@ -75,6 +79,43 @@ def ingest_raw_data() -> list[Path]:
     )
     return all_csvs
 
+def download_geojson(force: bool = False) -> Path:
+    """
+    Descarga el GeoJSON de estaciones troncales de TransMilenio desde
+    ArcGIS Hub y lo guarda en RAW_DATA_DIR.
+ 
+    Args:
+        force: Si es True, descarga aunque el archivo ya exista.
+ 
+    Returns:
+        Path al archivo GeoJSON descargado.
+    """
+    if GEOJSON_PATH.exists() and not force:
+        logger.debug(f"GeoJSON ya existe, saltando descarga: {GEOJSON_PATH.name}")
+        return GEOJSON_PATH
+ 
+    GEOJSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Descargando GeoJSON de estaciones troncales → {GEOJSON_PATH}")
+    urlretrieve(GEOJSON_URL, GEOJSON_PATH)
+    logger.success(f"GeoJSON guardado: {GEOJSON_PATH}")
+    return GEOJSON_PATH
+
+def load_stations_geojson(force: bool = False) -> gpd.GeoDataFrame:
+    """
+    Carga el GeoJSON de estaciones troncales, filtra columnas relevantes
+    y guarda una versión limpia en data/processed.
+    """
+    if CLEAN_GEOJSON_PATH.exists() and not force:
+        logger.debug(f"GeoJSON limpio ya existe, saltando: {CLEAN_GEOJSON_PATH.name}")
+        return gpd.read_file(CLEAN_GEOJSON_PATH)
+
+    gdf = gpd.read_file(GEOJSON_PATH)
+    gdf_clean = gdf[["codigo_nodo_estacion", "nombre_estacion", "geometry"]]
+
+    CLEAN_GEOJSON_PATH.parent.mkdir(parents=True, exist_ok=True)
+    gdf_clean.to_file(CLEAN_GEOJSON_PATH, driver="GeoJSON")
+    logger.info(f"GeoJSON limpio guardado: {CLEAN_GEOJSON_PATH.name} ({len(gdf_clean)} estaciones)")
+    return gdf_clean
 
 # ======================================
 # 2. PROCESAMIENTO: limpieza + agregación
@@ -287,19 +328,23 @@ def run_data_pipeline() -> list[Path]:
     Devuelve lista de parquets generados.
     """
     logger.info("========== DATA PIPELINE START ==========")
-
+ 
+    # 0. GeoJSON de estaciones
+    download_geojson()
+    load_stations_geojson()
+ 
     # 1. Ingesta
     csv_files = ingest_raw_data()
     if not csv_files:
         return []
-
+ 
     # 2. Procesamiento
     PARQUET_DIR.mkdir(parents=True, exist_ok=True)
     parquet_files: list[Path] = []
     
     all_df_linea = []
     all_df_estacion = []
-
+ 
     for csv_path in tqdm(csv_files, desc="Procesando CSVs"):
         out = PARQUET_DIR / csv_path.with_suffix(".parquet").name
         try:
@@ -311,10 +356,10 @@ def run_data_pipeline() -> list[Path]:
                 all_df_estacion.append(df_estacion)
         except Exception as e:
             logger.error(f"Error procesando {csv_path.name}: {e}")
-
+ 
     if all_df_linea and all_df_estacion:
         _update_dimensions(all_df_linea, all_df_estacion)
-
+ 
     logger.success(
         f"========== PIPELINE COMPLETO: {len(parquet_files)} parquets =========="
     )
@@ -445,8 +490,9 @@ def _extract_zip(zip_path: Path) -> list[Path]:
 
 
 @app.command()
-def main():
+def main(force_geojson: bool = typer.Option(False, "--force-geojson", help="Forzar re-descarga del GeoJSON aunque ya exista")):
     """Ejecuta el pipeline completo de datos de TransMilenio 2025."""
+    download_geojson(force=force_geojson)
     run_data_pipeline()
 
 
