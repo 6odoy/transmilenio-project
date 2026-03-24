@@ -9,6 +9,7 @@ dependencies:
   - tqdm
   - polars
   - pyarrow
+  - geopandas
   - matplotlib
   - seaborn
   - jupyter
