@@ -383,11 +383,11 @@ def _build_station_map(t, c):
 
     is_dark = c["bg_base"] == "#121212"
 
-    fig = go.Figure(go.Scattermapbox(
+    fig = go.Figure(go.Scattermap(
         lat=lats,
         lon=lons,
         mode="markers",
-        marker=go.scattermapbox.Marker(
+        marker=go.scattermap.Marker(
             size=9,
             color=colors if colors else TM_ROJO,
             opacity=0.9,
@@ -403,7 +403,7 @@ def _build_station_map(t, c):
     ))
 
     fig.update_layout(
-        mapbox=dict(
+        map=dict(
             style="carto-darkmatter" if is_dark else "carto-positron",
             center=dict(lat=4.648, lon=-74.1),
             zoom=10.8,
