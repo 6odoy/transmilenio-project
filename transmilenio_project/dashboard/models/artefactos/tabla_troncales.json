@@ -1,0 +1,62 @@
+[
+    {
+        "Linea": "Zona B Autonorte",
+        "Top_Estacion": "Portal Norte",
+        "Entradas": "197.610.937"
+    },
+    {
+        "Linea": "Zona G Nqs Sur",
+        "Top_Estacion": "Portal Sur - JFK Coop. Financiera",
+        "Entradas": "162.111.393"
+    },
+    {
+        "Linea": "Zona H Caracas Sur",
+        "Top_Estacion": "Portal Tunal",
+        "Entradas": "136.263.334"
+    },
+    {
+        "Linea": "Zona F Av. Americas",
+        "Top_Estacion": "Portal Américas",
+        "Entradas": "135.686.821"
+    },
+    {
+        "Linea": "Zona A Caracas",
+        "Top_Estacion": "Flores – Areandina",
+        "Entradas": "106.857.470"
+    },
+    {
+        "Linea": "Zona K Calle 26",
+        "Top_Estacion": "Portal El Dorado",
+        "Entradas": "99.372.469"
+    },
+    {
+        "Linea": "Zona L Carrera 10",
+        "Top_Estacion": "Portal 20 de Julio",
+        "Entradas": "98.585.032"
+    },
+    {
+        "Linea": "Zona C Av. Suba",
+        "Top_Estacion": "Portal Suba",
+        "Entradas": "91.292.910"
+    },
+    {
+        "Linea": "Zona E Nqs Central",
+        "Top_Estacion": "AV. Chile",
+        "Entradas": "85.916.889"
+    },
+    {
+        "Linea": "Zona D Calle 80",
+        "Top_Estacion": "Portal 80",
+        "Entradas": "84.187.534"
+    },
+    {
+        "Linea": "Zona J Eje Ambiental",
+        "Top_Estacion": "Museo del Oro",
+        "Entradas": "18.713.481"
+    },
+    {
+        "Linea": "Zona T Ciudad Bolivar",
+        "Top_Estacion": "Tunal (TransMiCable)",
+        "Entradas": "17.649.139"
+    }
+]

@@ -1,0 +1,2501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_dbc0a730b98429782287f21899adb507 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_dbc0a730b98429782287f21899adb507" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_dbc0a730b98429782287f21899adb507 = L.map(
+                "map_dbc0a730b98429782287f21899adb507",
+                {
+                    center: [4.64, -74.1],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11.4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f9e5270716bd6a1176c9e3bbc9f3e49a = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_f9e5270716bd6a1176c9e3bbc9f3e49a.addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            var circle_marker_fee83aebec8146ecf172d0fb49c6e068 = L.circleMarker(
+                [4.666352641436107, -74.07457455288298],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fee83aebec8146ecf172d0fb49c6e068.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Chile</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a4d8f4a9ebba91fefd301ec09d002fd6 = L.circleMarker(
+                [4.646876393808474, -74.09904645134877],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a4d8f4a9ebba91fefd301ec09d002fd6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>CAN</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00d36b2afbfebff620f8679683e3d964 = L.circleMarker(
+                [4.645397563881436, -74.07871009145556],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_00d36b2afbfebff620f8679683e3d964.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Campín - UAN</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_166bf7bef1847ab5381fe6fa6cd9c977 = L.circleMarker(
+                [4.610899086160519, -74.07150007434937],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_166bf7bef1847ab5381fe6fa6cd9c977.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Diego</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eec38ca515e41575d5e17d4f7167e9f5 = L.circleMarker(
+                [4.699150105856711, -74.0960182816602],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_eec38ca515e41575d5e17d4f7167e9f5.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Granja - Kr 77</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c9706526c9be1f34967f5ff5fea4abed = L.circleMarker(
+                [4.611683784449027, -74.09386594942337],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c9706526c9be1f34967f5ff5fea4abed.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Ricaurte - NQS</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e5e009a0fb6fb88e8de14864f1e88edc = L.circleMarker(
+                [4.706725245152247, -74.10873932323864],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_e5e009a0fb6fb88e8de14864f1e88edc.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Quirigua</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32aa97df6f1bd1f6108c02bf3d65f1c5 = L.circleMarker(
+                [4.686968338733456, -74.06444284253222],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_32aa97df6f1bd1f6108c02bf3d65f1c5.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Suba - Calle 100</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42b38c9c5a923423bd7fad2c29162214 = L.circleMarker(
+                [4.670151012299509, -74.07130491506688],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_42b38c9c5a923423bd7fad2c29162214.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 75 - Zona M</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c9b25c2da6a1aacb144521de16ceae13 = L.circleMarker(
+                [4.69393267967488, -74.08713193730172],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c9b25c2da6a1aacb144521de16ceae13.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Boyacá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_914fdc77bf958b61321b9f9345394e3f = L.circleMarker(
+                [4.575794151709622, -74.12007924002512],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_914fdc77bf958b61321b9f9345394e3f.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 40 Sur</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1daf785e7d334b76d8b5d111db4644eb = L.circleMarker(
+                [4.630117798427176, -74.13422457070207],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_1daf785e7d334b76d8b5d111db4644eb.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Américas - AV. Boyacá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4239e5ae503943f1923571d2b77fab6 = L.circleMarker(
+                [4.629677230521839, -74.13016384632475],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c4239e5ae503943f1923571d2b77fab6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Marsella</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_82031fb2f88c313759692c8b430c960b = L.circleMarker(
+                [4.712001231323956, -74.07230719784444],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_82031fb2f88c313759692c8b430c960b.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Niza - Calle 127</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_74af44741083f211b663593eb376f8b6 = L.circleMarker(
+                [4.74265373470601, -74.09120096230798],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_74af44741083f211b663593eb376f8b6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>La Campiña</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_51b9fa3a01f6ede1a91be8faf73903de = L.circleMarker(
+                [4.634194653572966, -74.15206783620962],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_51b9fa3a01f6ede1a91be8faf73903de.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Transversal 86</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_37d39834309e42a7b638c94094ee0e10 = L.circleMarker(
+                [4.63430649029258, -74.08970084804415],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_37d39834309e42a7b638c94094ee0e10.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Corferias</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_84bc003e10e2291a6bee0d0c91086186 = L.circleMarker(
+                [4.604171008787222, -74.09493313130062],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_84bc003e10e2291a6bee0d0c91086186.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Guatoque - Veraguas</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_eff43967f5fd80e070c06da94360f6f1 = L.circleMarker(
+                [4.616119343748627, -74.09396482996027],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_eff43967f5fd80e070c06da94360f6f1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>CDS - Carrera 32</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29240c136d645eeec193f99ea907edf6 = L.circleMarker(
+                [4.630875429616791, -74.08352723499065],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_29240c136d645eeec193f99ea907edf6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Ciudad Universitaria - Lotería de Bogotá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1ec43a8d05e15a25656a0b3e89e51cda = L.circleMarker(
+                [4.63712104779828, -74.07932617980647],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_1ec43a8d05e15a25656a0b3e89e51cda.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Universidad Nacional</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bf59102daf9eeb6f4f391d3d835785cd = L.circleMarker(
+                [4.661944439127925, -74.10877199870127],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_bf59102daf9eeb6f4f391d3d835785cd.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Avenida Rojas - UNISALESIANA</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59b89d2e95c2c0bd4246741887410bda = L.circleMarker(
+                [4.598135008352739, -74.08383625075113],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_59b89d2e95c2c0bd4246741887410bda.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Tercer Milenio</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4350edd377df5712cfc2aaa5f59c5bf0 = L.circleMarker(
+                [4.625987365683597, -74.08028965895312],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_4350edd377df5712cfc2aaa5f59c5bf0.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Concejo de Bogotá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59b9adab1a125978436b19070e628bf8 = L.circleMarker(
+                [4.593809438726154, -74.123755076579],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_59b9adab1a125978436b19070e628bf8.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>NQS - Calle 38A S</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15e386a4ddcf3bde8461950bce775f12 = L.circleMarker(
+                [4.657295279916713, -74.07768645941138],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_15e386a4ddcf3bde8461950bce775f12.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>7 de Agosto</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_54a16d70ca779caac06fe8d6e903c840 = L.circleMarker(
+                [4.68610283978296, -74.08076642117153],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_54a16d70ca779caac06fe8d6e903c840.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. 68</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f24c8cf97266e5a7b0a0ea924f654d16 = L.circleMarker(
+                [4.627850045092682, -74.11158410680022],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_f24c8cf97266e5a7b0a0ea924f654d16.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Distrito Grafiti</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_419b77560c79e621a67f8d844720035c = L.circleMarker(
+                [4.670162650409122, -74.06433866057165],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_419b77560c79e621a67f8d844720035c.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Polo - FINCOMERCIO</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_164f0f48c88ffa5362070f8e4f692f81 = L.circleMarker(
+                [4.599787201672794, -74.08876139103779],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_164f0f48c88ffa5362070f8e4f692f81.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Tygua - San José</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ea54cedb65130b2d63eefd113814b81 = L.circleMarker(
+                [4.637503527999294, -74.09313226319551],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_6ea54cedb65130b2d63eefd113814b81.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Quinta Paredes</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fd41ca260609d2c5bf5f2ad7636766d8 = L.circleMarker(
+                [4.650864820054418, -74.10164881898541],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fd41ca260609d2c5bf5f2ad7636766d8.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Salitre - El Greco</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a395343726a344e64968922007a1b8db = L.circleMarker(
+                [4.620325258204576, -74.09868610794165],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a395343726a344e64968922007a1b8db.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Zona Industrial</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_391ec56406df9ca2e9cd85ead149d93c = L.circleMarker(
+                [4.592172811180285, -74.19313531304007],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_391ec56406df9ca2e9cd85ead149d93c.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>León XIII</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_adda554fbbabd938bdb5572a2cd1adf2 = L.circleMarker(
+                [4.616921876915299, -74.089553444556],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_adda554fbbabd938bdb5572a2cd1adf2.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Paloquemao</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5395a382f85cb784a2262eae34c38822 = L.circleMarker(
+                [4.704666460866564, -74.10457026550118],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_5395a382f85cb784a2262eae34c38822.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Carrera 90</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5ec767c885f772909a5ea4f1edcc0a2 = L.circleMarker(
+                [4.642830024755338, -74.09653770929313],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a5ec767c885f772909a5ea4f1edcc0a2.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Gobernación</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ae528c7a7ffb4a4c26fd9e67c5bf9b2a = L.circleMarker(
+                [4.588962704262017, -74.199522612371],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_ae528c7a7ffb4a4c26fd9e67c5bf9b2a.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Terreros - Hospital Cardio Vascular</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_871ad98bff2bd13f74fc111f9cc25881 = L.circleMarker(
+                [4.675535012017993, -74.06980215105027],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_871ad98bff2bd13f74fc111f9cc25881.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Escuela Militar</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7f2f0929234413dc507cbd4472e9f425 = L.circleMarker(
+                [4.630863657469235, -74.14129817180734],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_7f2f0929234413dc507cbd4472e9f425.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Mandalay</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e766b2692dc82d5e89313a3a74068628 = L.circleMarker(
+                [4.702482850510757, -74.10028964534281],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_e766b2692dc82d5e89313a3a74068628.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Cali</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a27004a5a85dc90fc273434cc78423a9 = L.circleMarker(
+                [4.738936786160154, -74.08699228379736],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a27004a5a85dc90fc273434cc78423a9.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Suba - TV. 91</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_204659ae0f31c6188d95edbb128837ec = L.circleMarker(
+                [4.613017976820533, -74.09047649796362],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_204659ae0f31c6188d95edbb128837ec.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Ricaurte - CL 13</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a7fa8c172a3f5b2e6931ec1df8992f5 = L.circleMarker(
+                [4.581849057280713, -74.10142878243313],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_7a7fa8c172a3f5b2e6931ec1df8992f5.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Restrepo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fecae588ab92913603b7a66ceee218d0 = L.circleMarker(
+                [4.714558425952716, -74.0525582922202],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fecae588ab92913603b7a66ceee218d0.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Prado</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4088ecca4addd610ac0537957d855ec9 = L.circleMarker(
+                [4.76881876443823, -74.04357254828506],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_4088ecca4addd610ac0537957d855ec9.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Terminal</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_40c46699765b096bdf38b8fcbb000f9e = L.circleMarker(
+                [4.675997370862644, -74.05901951709693],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_40c46699765b096bdf38b8fcbb000f9e.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Virrey</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_88be3a1d5ca6da9805d0cb6969d1ffe4 = L.circleMarker(
+                [4.746184978881875, -74.04725484779414],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_88be3a1d5ca6da9805d0cb6969d1ffe4.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Toberin - Foundever</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9f12f4b39cd55bb67ed549514f604fa1 = L.circleMarker(
+                [4.698126889760766, -74.05530879980195],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_9f12f4b39cd55bb67ed549514f604fa1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Pepe Sierra</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_564cfde771873d70014a2f146308a236 = L.circleMarker(
+                [4.683949437564982, -74.05771229771717],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_564cfde771873d70014a2f146308a236.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 100 - Marketmedios</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3bbe8be4ae5d186cdb2d8c193cced5d7 = L.circleMarker(
+                [4.726850089637862, -74.05050333189976],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_3bbe8be4ae5d186cdb2d8c193cced5d7.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 142</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_218cc820b3111911b25f1af964e419fe = L.circleMarker(
+                [4.754622860218019, -74.04604464924742],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_218cc820b3111911b25f1af964e419fe.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Norte – Unicervantes</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bd2b092cfa45850a1c1b9a5b3b0daf6 = L.circleMarker(
+                [4.763336548323786, -74.04444370322351],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_1bd2b092cfa45850a1c1b9a5b3b0daf6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 187</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8feb269da1d85fbbdf9092fe4a6fca21 = L.circleMarker(
+                [4.721158197762578, -74.05145916301784],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_8feb269da1d85fbbdf9092fe4a6fca21.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Alcalá – Colegio S. Tomás Dominicos</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_18c4db678855583e122afb74819a90e7 = L.circleMarker(
+                [4.730891064158206, -74.04981122855385],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_18c4db678855583e122afb74819a90e7.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 146</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9780bf6fcf47e29e7ad7b8b8a267dc12 = L.circleMarker(
+                [4.704639636465494, -74.0542251639966],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_9780bf6fcf47e29e7ad7b8b8a267dc12.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 127</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_664dcc560d33861b35399adfd703db89 = L.circleMarker(
+                [4.668136029647685, -74.06030995135728],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_664dcc560d33861b35399adfd703db89.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Héroes</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4b4ce2d1b803ff3dd339cdc6d30cb121 = L.circleMarker(
+                [4.741915299191302, -74.04800034951191],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_4b4ce2d1b803ff3dd339cdc6d30cb121.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 161</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35771ec85e909236a1364f9cf97a29ad = L.circleMarker(
+                [4.692982600439019, -74.05618243307303],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_35771ec85e909236a1364f9cf97a29ad.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 106 - Maletas Explora</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9d3e4dc119e6e6aba7bb448d8716f559 = L.circleMarker(
+                [4.734588554219222, -74.04922623638949],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_9d3e4dc119e6e6aba7bb448d8716f559.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Mazurén</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0dedb54965ccbc28137102c9f2563abb = L.circleMarker(
+                [4.631452412878287, -74.06787872328032],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0dedb54965ccbc28137102c9f2563abb.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 45 - American School Way</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f9060e8b77fb480709a4c938ab499750 = L.circleMarker(
+                [4.681804753883138, -74.07742142136232],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_f9060e8b77fb480709a4c938ab499750.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Carrera 53</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_886d0cea4932b7e4a948ca7940428e79 = L.circleMarker(
+                [4.675611154981965, -74.06444316945309],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_886d0cea4932b7e4a948ca7940428e79.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>La Castellana</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc5ed35e3de71a081cd731a8cef2213a = L.circleMarker(
+                [4.576939314363686, -74.0937094048318],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fc5ed35e3de71a081cd731a8cef2213a.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. 1 Mayo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8c1440c5353b52ad98e46d4bcee4d606 = L.circleMarker(
+                [4.605421100257434, -74.08189427103363],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_8c1440c5353b52ad98e46d4bcee4d606.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>De La Sabana</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_24e4c5c5ec3d9255d68895fa74313371 = L.circleMarker(
+                [4.59459381881802, -74.18811218177783],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_24e4c5c5ec3d9255d68895fa74313371.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>La Despensa</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80b1e093aa1417cda6823a36d730cde5 = L.circleMarker(
+                [4.658237545704798, -74.06206786085158],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_80b1e093aa1417cda6823a36d730cde5.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 72</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4164d20879d5274f35ae30e2a50a635c = L.circleMarker(
+                [4.620464994750269, -74.07632059291059],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_4164d20879d5274f35ae30e2a50a635c.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Centro Memoria</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57364e92c46cb6ec0442475bd9fc0b99 = L.circleMarker(
+                [4.62278153734826, -74.10143787790989],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_57364e92c46cb6ec0442475bd9fc0b99.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Carrera 43 - Comapan</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_950585b34cbc435faf0f7414824d5e1f = L.circleMarker(
+                [4.56022754400784, -74.12387385255566],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_950585b34cbc435faf0f7414824d5e1f.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Consuelo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fee82af4feb5e8bcea117b1ffcd3c696 = L.circleMarker(
+                [4.602866880647855, -74.08040995428028],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fee82af4feb5e8bcea117b1ffcd3c696.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Jiménez - Caracas</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00ade6c441a6826f808bf3881f954819 = L.circleMarker(
+                [4.604249975583671, -74.0998613741849],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_00ade6c441a6826f808bf3881f954819.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Comuneros</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_92e34368e31207e48485050869fe5097 = L.circleMarker(
+                [4.6570670471491, -74.10564665978902],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_92e34368e31207e48485050869fe5097.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>El Tiempo – Cámara de Comercio de Bogotá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5578837019074bc8e81545a3a3d44b4b = L.circleMarker(
+                [4.637907782250823, -74.15935248629827],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_5578837019074bc8e81545a3a3d44b4b.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Biblioteca Tintal</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_567aad69c7c6a590f8ce52ead38cffc1 = L.circleMarker(
+                [4.581542540921835, -74.09035159822346],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_567aad69c7c6a590f8ce52ead38cffc1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Ciudad Jardín - UAN</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d001b322509b177cdbc9221d10c1a611 = L.circleMarker(
+                [4.594020771957304, -74.0818354237853],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_d001b322509b177cdbc9221d10c1a611.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Bicentenario</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0bdd47690a41edf66bd3b0c83c52fb50 = L.circleMarker(
+                [4.642981623195312, -74.0658282578455],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0bdd47690a41edf66bd3b0c83c52fb50.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Temporal Calle 57</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8c2543093653723325bc5792464c07cf = L.circleMarker(
+                [4.57030351923882, -74.1303886787077],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_8c2543093653723325bc5792464c07cf.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Biblioteca</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_327cb62839a5a700f5b2d81cfcc77328 = L.circleMarker(
+                [4.630668413035802, -74.07987856783132],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_327cb62839a5a700f5b2d81cfcc77328.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. ElDorado</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_68dbeb26c53c506794af3229835c482e = L.circleMarker(
+                [4.616651548430109, -74.07215845806978],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_68dbeb26c53c506794af3229835c482e.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 26</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af9c62eb0f58fa886cbfbe39a100ae33 = L.circleMarker(
+                [4.594269934546364, -74.13426992732451],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_af9c62eb0f58fa886cbfbe39a100ae33.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Alquería</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_112f3b18a67cc6b90946ff28ab2ab4c4 = L.circleMarker(
+                [4.596887946711874, -74.18122499859422],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_112f3b18a67cc6b90946ff28ab2ab4c4.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Bosa</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e46920fda6d63521d3a1e63861d09bd = L.circleMarker(
+                [4.623415731317321, -74.0841812050935],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_2e46920fda6d63521d3a1e63861d09bd.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>CAD</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f22c6db6db4b5a0f016e74b201964027 = L.circleMarker(
+                [4.631294536922991, -74.1457699625961],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_f22c6db6db4b5a0f016e74b201964027.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Banderas</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0bf8e9001ab35222cb4f9862787c1469 = L.circleMarker(
+                [4.607864622138164, -74.07686967795432],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0bf8e9001ab35222cb4f9862787c1469.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 19</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c7d25c550579b1080c925f67b86814f0 = L.circleMarker(
+                [4.60305325063616, -74.07909278337084],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c7d25c550579b1080c925f67b86814f0.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. Jiménez - CL 13</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_28607fee86d4411ba3c911a385e06282 = L.circleMarker(
+                [4.650039845346436, -74.07836245910983],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_28607fee86d4411ba3c911a385e06282.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Movistar Arena</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5a76b0ca929940fd589080d6511af2b = L.circleMarker(
+                [4.626897175554474, -74.06869679053271],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a5a76b0ca929940fd589080d6511af2b.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>AV. 39</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd54bd1abcde0d91d70bfcd4b6e466a9 = L.circleMarker(
+                [4.663029449928692, -74.06126126157599],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_dd54bd1abcde0d91d70bfcd4b6e466a9.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 76 - San Felipe</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1fbe7c915dbfd55636a64f682e84b4fc = L.circleMarker(
+                [4.648403969921902, -74.06487053484368],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_1fbe7c915dbfd55636a64f682e84b4fc.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 63</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_630f0d995d79dd5eded38d9d7cdc8885 = L.circleMarker(
+                [4.672312786740467, -74.05964363107933],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_630f0d995d79dd5eded38d9d7cdc8885.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Calle 85</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e2c6be3c197a26b5fcf6e76997316c0 = L.circleMarker(
+                [4.594798466140175, -74.11788074622952],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_3e2c6be3c197a26b5fcf6e76997316c0.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>NQS - Calle 30 S</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2ea5722c4d71e259b68f2ae08a292f6f = L.circleMarker(
+                [4.571416733654898, -74.09863412542575],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_2ea5722c4d71e259b68f2ae08a292f6f.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Country Sur</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_053dcdce6c6f1cc3b42d11f71101c94b = L.circleMarker(
+                [4.677755746127176, -74.07325476094951],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_053dcdce6c6f1cc3b42d11f71101c94b.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Carrera 47</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c044aeb6ebbad906da60227ec0169ee6 = L.circleMarker(
+                [4.709829487984559, -74.11050626882579],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c044aeb6ebbad906da60227ec0169ee6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal 80</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0b0d6765c927670cbbbff768221f84b6 = L.circleMarker(
+                [4.578915188912788, -74.1073638244642],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0b0d6765c927670cbbbff768221f84b6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Olaya</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_273fbef9ef67d5aca181bb10477be079 = L.circleMarker(
+                [4.557064564002366, -74.12182778886832],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_273fbef9ef67d5aca181bb10477be079.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Molinos</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_223be4531b41797057b6fce3751e89b0 = L.circleMarker(
+                [4.58628470770093, -74.09392541573067],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_223be4531b41797057b6fce3751e89b0.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Nariño</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_702a9a0996aea9f5ae11357c6b70ed74 = L.circleMarker(
+                [4.727455840781251, -74.07472333854827],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_702a9a0996aea9f5ae11357c6b70ed74.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Gratamira</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_465b61b9b5e2bcd96ca347673c674ba2 = L.circleMarker(
+                [4.628506463940081, -74.11867713273622],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_465b61b9b5e2bcd96ca347673c674ba2.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Pradera - Plaza Central</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0a534a0deae02818694b64bb84432e87 = L.circleMarker(
+                [4.606065335057134, -74.07432674893896],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0a534a0deae02818694b64bb84432e87.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Las Nieves</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c0b1564bfd7a62851aee54c8834db4f1 = L.circleMarker(
+                [4.675024658729783, -74.11714710072533],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c0b1564bfd7a62851aee54c8834db4f1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Modelia</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a01fe1a13b78dcf4167b772dedf9d59c = L.circleMarker(
+                [4.681622028944145, -74.1213980169888],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a01fe1a13b78dcf4167b772dedf9d59c.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal El Dorado – C.C. Nuestro Bogotá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_caddf763fc572a7c3d198be5a4d4ff3c = L.circleMarker(
+                [4.654902992832462, -74.06300913246494],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_caddf763fc572a7c3d198be5a4d4ff3c.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Flores – Areandina</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_add8f2df2c4f5663cae4d5167f956628 = L.circleMarker(
+                [4.601152978963138, -74.07290843384371],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_add8f2df2c4f5663cae4d5167f956628.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Museo del Oro</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5292db83f5f4c73073ec733592595ec1 = L.circleMarker(
+                [4.593551141016794, -74.12954495582522],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_5292db83f5f4c73073ec733592595ec1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>General Santander</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc7a534f27508b27a2988b6f89c385df = L.circleMarker(
+                [4.565718118715743, -74.09700840600513],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fc7a534f27508b27a2988b6f89c385df.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal 20 de Julio</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_66d14b0f4313aeb7415ac3a666f47a07 = L.circleMarker(
+                [4.706689822528658, -74.07117426613561],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_66d14b0f4313aeb7415ac3a666f47a07.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Humedal Córdoba</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e11c050f3a1a8735e41df9bfab444864 = L.circleMarker(
+                [4.568326563753448, -74.13541451320731],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_e11c050f3a1a8735e41df9bfab444864.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Parque</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6ab48f048347801cfe9340bac1d22fe = L.circleMarker(
+                [4.586148789664467, -74.08706590724249],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_e6ab48f048347801cfe9340bac1d22fe.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Policarpa</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_996533a10e00334277cbc4c91315aade = L.circleMarker(
+                [4.615247128529721, -74.069226468449],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_996533a10e00334277cbc4c91315aade.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Museo Nacional - FNG</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f97f632b9cfb9204f51c286db4e6b0a = L.circleMarker(
+                [4.595050515250533, -74.08622628902478],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_0f97f632b9cfb9204f51c286db4e6b0a.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Hospital</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf03e869a32311ba026bd5a8617cd3e9 = L.circleMarker(
+                [4.669008681376298, -74.11328003037636],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_cf03e869a32311ba026bd5a8617cd3e9.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Normandía</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9702f1f5e1f555bff7e4ddf86f51b4d4 = L.circleMarker(
+                [4.595787784538717, -74.1649697299199],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_9702f1f5e1f555bff7e4ddf86f51b4d4.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Perdomo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_05560c1f18a07c9b18a3c8fb3b73d64a = L.circleMarker(
+                [4.590847253249946, -74.09024599837927],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_05560c1f18a07c9b18a3c8fb3b73d64a.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Hortúa</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6f195f866379dafc7950abc0285cb326 = L.circleMarker(
+                [4.531714583945091, -74.11939099086611],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_6f195f866379dafc7950abc0285cb326.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Usme</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1fb25d346776e3fe219572ea868ca2aa = L.circleMarker(
+                [4.690885926692645, -74.0846012702891],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_1fb25d346776e3fe219572ea868ca2aa.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Ferias</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_948eba5394ec5a93099af66363741554 = L.circleMarker(
+                [4.637559045539702, -74.06678795247298],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_948eba5394ec5a93099af66363741554.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Temporal Marly</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_03b22cfe1cc2c42844b28ad9edcd6bb1 = L.circleMarker(
+                [4.633180282913106, -74.16461426660447],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_03b22cfe1cc2c42844b28ad9edcd6bb1.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Patio Bonito</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b177e81a379b3c70c66ce8d3ae071881 = L.circleMarker(
+                [4.569571464031223, -74.13924020305714],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_b177e81a379b3c70c66ce8d3ae071881.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Tunal</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bfb9e899262c1251bad4cd2f194f8266 = L.circleMarker(
+                [4.58297257638977, -74.0994017537384],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_bfb9e899262c1251bad4cd2f194f8266.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Fucha</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8c1fb74dc6528508619d500e33054018 = L.circleMarker(
+                [4.696881601543901, -74.09193284888886],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_8c1fb74dc6528508619d500e33054018.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Minuto de Dios</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2d174dd7a44eca95dbc2984f84f8577d = L.circleMarker(
+                [4.629381310202615, -74.17305846411314],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_2d174dd7a44eca95dbc2984f84f8577d.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Américas</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_93c5c1ad22a0d27cb84919e15edaeaea = L.circleMarker(
+                [4.602579756576608, -74.06840143842119],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_93c5c1ad22a0d27cb84919e15edaeaea.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Las Aguas - Centro Colombo Americano</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_15b0580c812980df9a17e573bdb58caa = L.circleMarker(
+                [4.746815071110087, -74.09427890362022],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_15b0580c812980df9a17e573bdb58caa.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Suba</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_872358c870a57099c77e538faab55bf9 = L.circleMarker(
+                [4.721267158257204, -74.0747116339291],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_872358c870a57099c77e538faab55bf9.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Suba - AV. Boyacá</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_16bf0db60ea83e1fc27775656aec4d95 = L.circleMarker(
+                [4.570968483577163, -74.12470871898489],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_16bf0db60ea83e1fc27775656aec4d95.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Santa Lucía</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8428edb433f1c4e8af5827990f89a21b = L.circleMarker(
+                [4.676389657040512, -74.06717673781442],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_8428edb433f1c4e8af5827990f89a21b.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Martín</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6caaadea8fd19d398866da51799bd4d = L.circleMarker(
+                [4.604646225337709, -74.0673158462673],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_a6caaadea8fd19d398866da51799bd4d.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Universidades – CityU</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c28b40c38e2265626b7f662f5eae6714 = L.circleMarker(
+                [4.601675025619935, -74.10261754903561],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_c28b40c38e2265626b7f662f5eae6714.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Santa Isabel</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b6d085f008302e177dd8f1dcf876174e = L.circleMarker(
+                [4.684694637263692, -74.06321827093115],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_b6d085f008302e177dd8f1dcf876174e.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Suba - Calle 95</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cba6a98da98d976ce90cd30b679bf481 = L.circleMarker(
+                [4.625669742217356, -74.10463943333943],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_cba6a98da98d976ce90cd30b679bf481.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Puente Aranda</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_54b3d25407987ab0c872772a1e0f4190 = L.circleMarker(
+                [4.57680972493108, -74.11438050582953],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_54b3d25407987ab0c872772a1e0f4190.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Quiroga</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_66e69c5b55355f16f16eef8eedb81ad7 = L.circleMarker(
+                [4.693400771058854, -74.06720873995816],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_66e69c5b55355f16f16eef8eedb81ad7.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Puentelargo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80b745050595232c11c9e1d2057e7251 = L.circleMarker(
+                [4.601029434184011, -74.07742242431827],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_80b745050595232c11c9e1d2057e7251.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Victorino</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_19bfedceb85f4f0d225d73bf9a9de736 = L.circleMarker(
+                [4.596280940258974, -74.15688105483866],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_19bfedceb85f4f0d225d73bf9a9de736.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>CC Paseo Villa del Río - Madelena</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_52791a64464b8ddbf3a0dd65903d0751 = L.circleMarker(
+                [4.585960644043299, -74.20544973606903],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_52791a64464b8ddbf3a0dd65903d0751.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Mateo - CC Unisur</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fa2b108b9a8ad18d06741a2453c07e96 = L.circleMarker(
+                [4.595107262813356, -74.14741028754624],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_fa2b108b9a8ad18d06741a2453c07e96.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Sevillana</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6964146fa74b67501c64e41f6061438f = L.circleMarker(
+                [4.680351057056148, -74.06481662477188],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_6964146fa74b67501c64e41f6061438f.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Rionegro</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_165119fa5c692c29ab01928450af1651 = L.circleMarker(
+                [4.699241108397645, -74.06984394178146],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_165119fa5c692c29ab01928450af1651.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Suba - Calle 116</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07b1789abf08cddc003082bdee03481e = L.circleMarker(
+                [4.590195556533071, -74.08432732289046],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_07b1789abf08cddc003082bdee03481e.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Bernardo</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_658ee6b83b3535edcbdea67f5005d627 = L.circleMarker(
+                [4.59737051091117, -74.11064254777453],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_658ee6b83b3535edcbdea67f5005d627.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>SENA</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94ac2b93740b6b2dec11754e159c23ea = L.circleMarker(
+                [4.609735205577463, -74.0867947813114],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_94ac2b93740b6b2dec11754e159c23ea.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>San Facon Carrera 22</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff9f40039b9c2c4473981142169a95b7 = L.circleMarker(
+                [4.564653275897263, -74.12558393515768],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_ff9f40039b9c2c4473981142169a95b7.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Socorro</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2ae267167cfa3ea6dcb786dcd7448119 = L.circleMarker(
+                [4.73550811160933, -74.08098652277597],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_2ae267167cfa3ea6dcb786dcd7448119.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>21 Ángeles</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_50599ce3799d7f51c32aa3399d24be28 = L.circleMarker(
+                [4.621575510484896, -74.06971917911426],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_50599ce3799d7f51c32aa3399d24be28.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Temporal Calle 34</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ea0ac2632d05f2286b8b1b02981964db = L.circleMarker(
+                [4.595562828984624, -74.1426492141672],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_ea0ac2632d05f2286b8b1b02981964db.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Venecia</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7fac899c0d90c3c37cc4a40f6a3c619d = L.circleMarker(
+                [4.543654328580425, -74.12085158858692],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_7fac899c0d90c3c37cc4a40f6a3c619d.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Danubio</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e10782bd2998c02899fe9458440e15a6 = L.circleMarker(
+                [4.596939945160861, -74.16929783953442],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_e10782bd2998c02899fe9458440e15a6.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Portal Sur - JFK Coop. Financiera</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_750fb8e071fc3ce850992bb306bf88f2 = L.circleMarker(
+                [4.637559045539702, -74.06678795247298],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#C1001F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 4.5, "stroke": true, "weight": 1.5}
+            ).addTo(map_dbc0a730b98429782287f21899adb507);
+        
+    
+            circle_marker_750fb8e071fc3ce850992bb306bf88f2.bindTooltip(
+                `<div>
+                     <span style='font-family: Inter, sans-serif; font-weight: bold;'>Marly</span>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>

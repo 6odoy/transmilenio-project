@@ -1,0 +1,182 @@
+/* =============================================================================
+   TransMilenio Dashboard — Estilos Premium Institucionales
+   Identidad: Rojo #C1001F · Amarillo #FFD100 · Fondo #F4F6F9
+   ============================================================================= */
+
+/* ── Reset y Tipografía Global ── */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* ── Scrollbar Personalizado (Chromium) ── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(193, 0, 31, 0.25);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(193, 0, 31, 0.45);
+}
+
+/* ── Navbar Refinamientos ── */
+.navbar {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+    transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+    opacity: 0.9;
+}
+
+/* ── Tarjetas KPI — Efecto Premium Interactivo ── */
+.kpi-card {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.kpi-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #C1001F 0%, #FFD100 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+.kpi-card:hover::before {
+    opacity: 1;
+}
+
+/* ── Botones — Transiciones Suaves ── */
+.btn {
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* ── Select/Dropdowns ── */
+.form-select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-select:focus {
+    border-color: #C1001F;
+    box-shadow: 0 0 0 0.2rem rgba(193, 0, 31, 0.15);
+}
+
+/* ── Switch de Tema ── */
+.form-check-input:checked {
+    background-color: #C1001F;
+    border-color: #C1001F;
+}
+
+/* ── Contenedores con Placeholders ── */
+.rounded {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Animación de Entrada Sutil ── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpi-card {
+    animation: fadeInUp 0.5s ease-out both;
+}
+
+.kpi-card:nth-child(1) { animation-delay: 0.05s; }
+.kpi-card:nth-child(2) { animation-delay: 0.1s; }
+.kpi-card:nth-child(3) { animation-delay: 0.15s; }
+.kpi-card:nth-child(4) { animation-delay: 0.2s; }
+
+/* ── Footer ── */
+footer hr {
+    opacity: 0.15;
+}
+
+/* ── Listas en Formularios ── */
+.list-group-item {
+    background-color: transparent;
+}
+
+/* ── Tooltips de Plotly — Tema Institucional ── */
+.js-plotly-plot .plotly .modebar {
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.js-plotly-plot .plotly .modebar:hover {
+    opacity: 1;
+}
+
+/* ── Formulario de Predicción ── */
+.form-control:focus,
+.form-select:focus {
+    border-color: #C1001F !important;
+    box-shadow: 0 0 0 0.2rem rgba(193, 0, 31, 0.12) !important;
+}
+
+.form-control,
+.form-select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+/* ── Resultado de Predicción — Animación de Entrada ── */
+#pred-resultado-container > div {
+    animation: fadeInUp 0.4s ease-out both;
+}
+
+@keyframes resultPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+#pred-resultado-container h2 {
+    animation: resultPulse 2s ease-in-out 0.4s 1;
+}
+
+/* ── Responsividad Extra ── */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 0.9rem !important;
+    }
+    
+    .kpi-card {
+        animation-delay: 0s !important;
+    }
+}
