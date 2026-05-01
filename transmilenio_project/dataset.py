@@ -1,7 +1,9 @@
 import json
 import re
+import time
 import zipfile
 from pathlib import Path
+from urllib.error import URLError, HTTPError
 from urllib.request import urlopen, urlretrieve
 
 import polars as pl
@@ -96,7 +98,7 @@ def download_geojson(force: bool = False) -> Path:
  
     GEOJSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     logger.info(f"Descargando GeoJSON de estaciones troncales → {GEOJSON_PATH}")
-    urlretrieve(GEOJSON_URL, GEOJSON_PATH)
+    _urlretrieve_with_retry(GEOJSON_URL, GEOJSON_PATH)
     logger.success(f"GeoJSON guardado: {GEOJSON_PATH}")
     return GEOJSON_PATH
 
@@ -145,15 +147,20 @@ def process_raw_data(csv_path: Path, output_path: Path) -> tuple[Path, pl.DataFr
             df_linea_counts = df.select(["codigo_linea", "nombre_linea"]).group_by(["codigo_linea", "nombre_linea"]).len()
             df_estacion_counts = df.select(["codigo_estacion", "nombre_estacion"]).group_by(["codigo_estacion", "nombre_estacion"]).len()
             df.select(FINAL_COLUMNS).write_parquet(output_path)
-            return output_path, df_linea_counts, df_estacion_counts
-            
+            return output_path, df_linea_counts, df_estacion_counts, None
+
         logger.debug(f"Parquet ya existe, saltando: {output_path.name}")
-        return output_path, None, None
+        return output_path, None, None, None
 
     logger.debug(f"Procesando: {csv_path.name}")
 
     # 1. Carga y selección de columnas ─────────────────────────────
     df = pl.read_csv(csv_path, try_parse_dates=False, infer_schema_length=5000)
+
+    missing = [c for c in COLUMNS_TO_KEEP if c not in df.columns]
+    if missing:
+        raise ValueError(f"Columnas faltantes en {csv_path.name}: {missing}. Columnas disponibles: {df.columns}")
+
     df = df.select(COLUMNS_TO_KEEP)
 
     # 2. Tipado y timestamp ────────────────────────────────────────
@@ -211,6 +218,18 @@ def process_raw_data(csv_path: Path, output_path: Path) -> tuple[Path, pl.DataFr
             .then(pl.lit("Zona G NQS Sur"))
             .otherwise(pl.col("nombre_linea"))
             .alias("nombre_linea")
+    )
+
+    # Unificar Zona F Calle 13 (39) hacia Zona F Av. Americas (31)
+    df = df.with_columns(
+        pl.when(pl.col("codigo_linea") == 39)
+            .then(pl.lit("Zona F Av. Americas"))
+            .otherwise(pl.col("nombre_linea"))
+            .alias("nombre_linea"),
+        pl.when(pl.col("codigo_linea") == 39)
+            .then(pl.lit(31).cast(pl.Int64))
+            .otherwise(pl.col("codigo_linea"))
+            .alias("codigo_linea")
     )
 
     # 6. Renombrar columnas ──────────────────────────────────────────
@@ -305,6 +324,7 @@ def process_raw_data(csv_path: Path, output_path: Path) -> tuple[Path, pl.DataFr
 
     df_linea_counts = df.select(["codigo_linea", "nombre_linea"]).group_by(["codigo_linea", "nombre_linea"]).len()
     df_estacion_counts = df.select(["codigo_estacion", "nombre_estacion"]).group_by(["codigo_estacion", "nombre_estacion"]).len()
+    df_linea_estaciones = df.select(["codigo_linea", "codigo_estacion"]).group_by(["codigo_linea", "codigo_estacion"]).len()
 
     # 9. Selección final y persistencia ────────────────────────────
     df = df.select(FINAL_COLUMNS)
@@ -312,7 +332,7 @@ def process_raw_data(csv_path: Path, output_path: Path) -> tuple[Path, pl.DataFr
     output_path.parent.mkdir(parents=True, exist_ok=True)
     df.write_parquet(output_path)
     logger.info(f"Guardado: {output_path.name} ({len(df)} filas)")
-    return output_path, df_linea_counts, df_estacion_counts
+    return output_path, df_linea_counts, df_estacion_counts, df_linea_estaciones
 
 
 # ======================================
@@ -344,31 +364,35 @@ def run_data_pipeline() -> list[Path]:
     
     all_df_linea = []
     all_df_estacion = []
+    all_df_linea_estaciones = []
  
     for csv_path in tqdm(csv_files, desc="Procesando CSVs"):
         out = PARQUET_DIR / csv_path.with_suffix(".parquet").name
         try:
-            pq, df_linea, df_estacion = process_raw_data(csv_path, out)
+            pq, df_linea, df_estacion, df_linea_estaciones_out = process_raw_data(csv_path, out)
             parquet_files.append(pq)
             if df_linea is not None:
                 all_df_linea.append(df_linea)
             if df_estacion is not None:
                 all_df_estacion.append(df_estacion)
+            if df_linea_estaciones_out is not None:
+                all_df_linea_estaciones.append(df_linea_estaciones_out)
         except Exception as e:
             logger.error(f"Error procesando {csv_path.name}: {e}")
  
-    if all_df_linea and all_df_estacion:
-        _update_dimensions(all_df_linea, all_df_estacion)
+    if all_df_linea and all_df_linea_estaciones:
+        _update_dimensions(all_df_linea, all_df_estacion, all_df_linea_estaciones)
  
     logger.success(
         f"========== PIPELINE COMPLETO: {len(parquet_files)} parquets =========="
     )
     return parquet_files
 
-def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[pl.DataFrame]):
+def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[pl.DataFrame], all_df_linea_estaciones: list[pl.DataFrame]):
     logger.info("Actualizando dimensiones (JSONs)")
     df_lineas_concat = pl.concat(all_df_linea)
     df_estaciones_concat = pl.concat(all_df_estacion)
+    df_linea_estaciones_concat = pl.concat(all_df_linea_estaciones)
 
     df_lineas_agg = (
         df_lineas_concat.group_by(["codigo_linea", "nombre_linea"]).sum()
@@ -382,6 +406,11 @@ def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[p
         .unique(subset=["codigo_estacion"], keep="first")
         .sort("codigo_estacion")
     )
+    df_linea_estaciones_agg = (
+        df_linea_estaciones_concat.group_by(["codigo_linea", "codigo_estacion"]).sum()
+        .group_by("codigo_linea")
+        .agg(pl.col("codigo_estacion").unique())
+    )
 
     dim_linea = {
         str(row["codigo_linea"]): row["nombre_linea"] 
@@ -391,9 +420,14 @@ def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[p
         str(row["codigo_estacion"]): row["nombre_estacion"] 
         for row in df_estaciones_agg.to_dicts()
     }
+    linea_estaciones = {
+        str(row["codigo_linea"]): row["codigo_estacion"] 
+        for row in df_linea_estaciones_agg.to_dicts()
+    }
 
     path_dim_linea = PROCESSED_DATA_DIR / "dim_linea.json"
     path_dim_estacion = PROCESSED_DATA_DIR / "dim_estacion.json"
+    path_linea_estaciones = PROCESSED_DATA_DIR / "linea_estaciones.json"
     
     if path_dim_linea.exists():
         try:
@@ -410,12 +444,23 @@ def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[p
                 dim_estacion = {**old_dim_estacion, **dim_estacion}
         except Exception as e:
             logger.warning(f"No se pudo leer {path_dim_estacion.name}: {e}")
+
+    if path_linea_estaciones.exists():
+        try:
+            with open(path_linea_estaciones, "r", encoding="utf-8") as f:
+                old_linea_estaciones = json.load(f)
+                linea_estaciones = {**old_linea_estaciones, **linea_estaciones}
+        except Exception as e:
+            logger.warning(f"No se pudo leer {path_linea_estaciones.name}: {e}")
             
     with open(path_dim_linea, "w", encoding="utf-8") as f:
         json.dump(dim_linea, f, ensure_ascii=False, indent=2)
-        
+
     with open(path_dim_estacion, "w", encoding="utf-8") as f:
         json.dump(dim_estacion, f, ensure_ascii=False, indent=2)
+        
+    with open(path_linea_estaciones, "w", encoding="utf-8") as f:
+        json.dump(linea_estaciones, f, ensure_ascii=False, indent=2)
         
     logger.info("Dimensiones guardadas en JSON exitosamente.")
 
@@ -424,12 +469,48 @@ def _update_dimensions(all_df_linea: list[pl.DataFrame], all_df_estacion: list[p
 # HELPERS (privados)
 # =======================
 
+_NET_TIMEOUT = 30
+_MAX_RETRIES = 3
+
+
+def _urlopen_with_retry(url: str, timeout: int = _NET_TIMEOUT) -> str:
+    """Abre una URL con reintentos y backoff exponencial. Devuelve el cuerpo como str."""
+    for attempt in range(_MAX_RETRIES):
+        try:
+            with urlopen(url, timeout=timeout) as response:
+                return response.read().decode("utf-8")
+        except (URLError, HTTPError, OSError) as exc:
+            if attempt < _MAX_RETRIES - 1:
+                wait = 2 ** attempt
+                logger.warning(f"Intento {attempt + 1}/{_MAX_RETRIES} fallido para {url}: {exc}. Reintentando en {wait}s...")
+                time.sleep(wait)
+            else:
+                logger.error(f"No se pudo acceder a {url} tras {_MAX_RETRIES} intentos: {exc}")
+                raise
+
+
+def _urlretrieve_with_retry(url: str, dest: Path, timeout: int = _NET_TIMEOUT) -> None:
+    """Descarga url a dest con reintentos y backoff exponencial."""
+    for attempt in range(_MAX_RETRIES):
+        try:
+            urlretrieve(url, dest)
+            return
+        except (URLError, HTTPError, OSError) as exc:
+            if dest.exists():
+                dest.unlink()
+            if attempt < _MAX_RETRIES - 1:
+                wait = 2 ** attempt
+                logger.warning(f"Intento {attempt + 1}/{_MAX_RETRIES} fallido descargando {url}: {exc}. Reintentando en {wait}s...")
+                time.sleep(wait)
+            else:
+                logger.error(f"No se pudo descargar {url} tras {_MAX_RETRIES} intentos: {exc}")
+                raise
+
 
 def _list_remote_files() -> list[str]:
     """Consulta el HTML remoto y devuelve nombres de ZIP del año 2025."""
     logger.info(f"Consultando índice remoto: {INDEX_URL}")
-    with urlopen(INDEX_URL) as response:
-        html = response.read().decode("utf-8")
+    html = _urlopen_with_retry(INDEX_URL)
 
     all_zips = re.findall(r"(salidas\d{8}\.zip)", html)
 
@@ -458,7 +539,7 @@ def _download_file(name: str) -> Path:
 
     url = BASE_URL + name
     logger.info(f"Descargando {url} → {dest}")
-    urlretrieve(url, dest)
+    _urlretrieve_with_retry(url, dest)
     return dest
 
 
@@ -467,7 +548,14 @@ def _extract_zip(zip_path: Path) -> list[Path]:
     CSV_DIR.mkdir(parents=True, exist_ok=True)
     extracted: list[Path] = []
 
-    with zipfile.ZipFile(zip_path, "r") as zf:
+    try:
+        zf_obj = zipfile.ZipFile(zip_path, "r")
+    except zipfile.BadZipFile:
+        logger.error(f"ZIP corrupto o inválido, eliminando: {zip_path.name}")
+        zip_path.unlink(missing_ok=True)
+        return []
+
+    with zf_obj as zf:
         for member in zf.namelist():
             if member.lower().endswith(".csv"):
                 out_path = CSV_DIR / Path(member).name

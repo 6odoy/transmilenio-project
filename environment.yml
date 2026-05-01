@@ -14,7 +14,16 @@ dependencies:
   - seaborn
   - jupyter
   - jupyterlab
+  - pytest
   - ruff
+  - dash
+  - dash-bootstrap-components
+  - pandas
+  - scikit-learn
+  - joblib
+  - numpy
+  - plotly
+  - gunicorn
   - pip:
     - python-dotenv
     - mkdocs
