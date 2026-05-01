@@ -151,23 +151,11 @@ make format               # Formatear código con ruff
 El dashboard tiene dos módulos:
 
 - **Indicadores Generales** — KPIs del sistema (afluencia diaria, troncal de mayor demanda, hora pico, estación más concurrida), mapa interactivo de estaciones coloreado por línea, y tabla de métricas por troncal.
-- **Simulador de Demanda** — proyección de afluencia para la futura Troncal Avenida 68 basada en inferencia causal y variables operativas.
 
 Soporta español, inglés e italiano, y tema claro/oscuro.
 
 ---
 
-## Inferencia Causal
-
-Ver [`docs/inferencia_causal.md`](docs/inferencia_causal.md) para el mapa completo de:
-- 8 preguntas causales identificadas (clima, festivos, Ciclovía, eventos masivos, precio combustible, siniestros, calidad del aire, control sintético Av. 68)
-- Métodos formales para cada pregunta (DiD, Event Study, IV, Synthetic Control)
-- Fuentes de datos externas con URLs y formato de ingesta
-- DAG causal del sistema
-- Tabla de priorización
-
----
-
 ## Contexto académico
 
-Proyecto desarrollado en el marco del **Reto de Ciudades Sostenibles e Inferencia Causal** — Uniandes Experimental Computing (UEC).
+Proyecto desarrollado en el marco del **2026 Urban Data Science Summer School** celebrado en Trento, Italia
