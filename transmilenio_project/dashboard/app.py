@@ -327,10 +327,14 @@ def build_dynamic_table(t, c):
         style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
     )
 def _load_geojson_stations():
-    """Carga las estaciones desde el archivo GeoJSON y retorna listas de lat, lon, nombres y colores."""
+    """Carga estaciones del GeoJSON. Retorna (lats, lons, names, colors, lines_data).
+
+    lines_data: dict {linea: {"color": str, "lats": [...], "lons": [...]}}
+    ordenado por latitud descendente para trazar las líneas de norte a sur.
+    """
     from config import GEOJSON_PATH, TM_ROJO
     lats, lons, names, colors = [], [], [], []
-    
+
     color_file = os.path.join(BASE_DIR, "models", "artefactos", "estacion_color.json")
     estacion_colors = {}
     try:
@@ -340,6 +344,19 @@ def _load_geojson_stations():
     except Exception:
         pass
 
+    linea_estaciones_file = os.path.join(
+        BASE_DIR, "..", "..", "data", "processed", "linea_estaciones.json"
+    )
+    linea_estaciones = {}
+    try:
+        if os.path.exists(linea_estaciones_file):
+            with open(linea_estaciones_file, "r", encoding="utf-8") as f:
+                linea_estaciones = json.load(f)
+    except Exception:
+        pass
+
+    # Índice nodo → coordenadas
+    nodo_coords: dict = {}
     try:
         if os.path.exists(GEOJSON_PATH):
             with open(GEOJSON_PATH, "r", encoding="utf-8") as f:
@@ -347,28 +364,44 @@ def _load_geojson_stations():
             for feat in data.get("features", []):
                 geom = feat.get("geometry", {})
                 props = feat.get("properties", {})
-                
                 nodo = str(props.get("codigo_nodo_estacion", ""))
-                
                 if geom.get("type") == "Point":
                     coords = geom.get("coordinates", [])
                     if len(coords) >= 2:
+                        nodo_coords[nodo] = (coords[1], coords[0])  # (lat, lon)
                         lons.append(coords[0])
                         lats.append(coords[1])
                         names.append(props.get("nombre_estacion", "Estación"))
-                        
                         color_asignado = estacion_colors.get(nodo, {}).get("color", TM_ROJO)
                         colors.append(color_asignado)
     except Exception:
         pass
-    return lats, lons, names, colors
+
+    # Construye trazos por línea ordenados de norte a sur (lat desc)
+    lines_data: dict = {}
+    for linea, nodos in linea_estaciones.items():
+        puntos = []
+        for n in nodos:
+            coords = nodo_coords.get(str(n))
+            if coords:
+                puntos.append(coords)
+        if len(puntos) < 2:
+            continue
+        puntos.sort(key=lambda p: -p[0])  # norte → sur
+        color = estacion_colors.get(str(nodos[0]), {}).get("color", TM_ROJO)
+        lines_data[linea] = {
+            "color": color,
+            "lats": [p[0] for p in puntos],
+            "lons": [p[1] for p in puntos],
+        }
+
+    return lats, lons, names, colors, lines_data
 
 def _build_station_map(t, c):
-    """Construye un mapa Plotly Scattermapbox con las estaciones de TransMilenio."""
-    lats, lons, names, colors = _load_geojson_stations()
+    """Construye el mapa de estaciones con líneas suaves por troncal."""
+    lats, lons, names, colors, lines_data = _load_geojson_stations()
 
     if not lats:
-        # Fallback si no hay datos
         return html.Div(
             [
                 html.I(className="bi bi-map text-muted mb-2", style={"fontSize": "2.5rem"}),
@@ -383,7 +416,21 @@ def _build_station_map(t, c):
 
     is_dark = c["bg_base"] == "#121212"
 
-    fig = go.Figure(go.Scattermap(
+    # ── Trazos de líneas (uno por troncal) ──
+    traces = []
+    for linea, ld in lines_data.items():
+        traces.append(go.Scattermap(
+            lat=ld["lats"],
+            lon=ld["lons"],
+            mode="lines",
+            line=dict(width=2.5, color=ld["color"]),
+            opacity=0.55,
+            hoverinfo="skip",
+            showlegend=False,
+        ))
+
+    # ── Puntos de estaciones encima ──
+    traces.append(go.Scattermap(
         lat=lats,
         lon=lons,
         mode="markers",
@@ -400,7 +447,10 @@ def _build_station_map(t, c):
             font_color="white",
             bgcolor=colors if colors else TM_ROJO,
         ),
+        showlegend=False,
     ))
+
+    fig = go.Figure(traces)
 
     fig.update_layout(
         map=dict(
