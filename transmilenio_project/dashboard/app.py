@@ -377,7 +377,7 @@ def _load_geojson_stations():
     except Exception:
         pass
 
-    # Construye trazos por línea ordenados de norte a sur (lat desc)
+    # Construye trazos por línea respetando el orden del JSON (lista enlazada)
     lines_data: dict = {}
     for linea, nodos in linea_estaciones.items():
         puntos = []
@@ -387,7 +387,6 @@ def _load_geojson_stations():
                 puntos.append(coords)
         if len(puntos) < 2:
             continue
-        puntos.sort(key=lambda p: -p[0])  # norte → sur
         color = estacion_colors.get(str(nodos[0]), {}).get("color", TM_ROJO)
         lines_data[linea] = {
             "color": color,
