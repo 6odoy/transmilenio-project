@@ -19,6 +19,24 @@ from models.predictor import (
     predecir_afluencia,
     obtener_estaciones_disponibles,
 )
+from charts_causal import (
+    build_event_study_main,
+    build_efectos_individuales,
+    build_subgrupos,
+    build_timeline_festivos,
+    build_clima_coeficientes,
+    build_clima_simulacion,
+    build_ciclovia_mapa,
+    build_ciclovia_resultados,
+    build_ciclovia_ratio,
+    build_campin_event_study,
+    build_campin_por_evento,
+    build_campin_spillover,
+    build_campin_fdv_comparacion,
+    build_fdv_tipo_dia,
+    build_combustible_serie,
+    build_combustible_especificaciones,
+)
 
 # ==============================================================================
 # INICIALIZACIÓN DE LA APLICACIÓN
@@ -534,6 +552,266 @@ def build_page_dashboard(t, c):
     ])
 
 
+def build_page_causal(t, c, lang_code="es"):
+    """Página 2: Módulo de inferencia causal con resultados por análisis + simulador RF."""
+
+    # ── Helpers locales ──────────────────────────────────────────────────────
+    def fig_card(src, caption):
+        return dbc.Card(
+            dbc.CardBody([
+                html.Img(src=src, style={"width": "100%", "height": "auto", "borderRadius": "6px"}),
+                html.Small(caption, className="d-block text-center mt-2",
+                           style={"color": c["text_muted"], "fontSize": "0.78rem", "lineHeight": "1.4"})
+            ]),
+            className="shadow-sm border-0 mb-3",
+            style={"borderRadius": "10px", "backgroundColor": c["card_bg"]}
+        )
+
+    def finding_banner(badge_key, badge_color, title_key, method_key, finding_key, border_hex):
+        return dbc.Card(
+            dbc.CardBody(
+                dbc.Row([
+                    dbc.Col([
+                        dbc.Badge(t[badge_key], color=badge_color,
+                                  className="mb-2 px-3 py-2",
+                                  style={"fontSize": "0.8rem", "fontWeight": "600"}),
+                        html.H5(t[title_key], className="fw-bold mb-1 mt-1",
+                                style={"color": c["text_main"]}),
+                        html.Code(t[method_key],
+                                  style={"fontSize": "0.78rem", "color": c["text_muted"],
+                                         "whiteSpace": "pre-wrap"}),
+                    ], md=5, className="mb-2"),
+                    dbc.Col(
+                        html.Div([
+                            html.I(className="bi bi-lightbulb-fill me-2",
+                                   style={"color": TM_AMARILLO, "fontSize": "1rem",
+                                          "flexShrink": "0"}),
+                            html.Span(t[finding_key],
+                                      style={"color": c["text_main"], "fontSize": "0.88rem",
+                                             "lineHeight": "1.5"})
+                        ], className="d-flex align-items-start p-3 h-100",
+                           style={"backgroundColor": "rgba(255,209,0,0.07)",
+                                  "border": f"1px solid {TM_AMARILLO}55",
+                                  "borderRadius": "8px"}),
+                        md=7, className="mb-2"
+                    ),
+                ], className="g-2 align-items-stretch")
+            ),
+            className="shadow-sm border-0 mb-3",
+            style={"borderRadius": "12px", "backgroundColor": c["card_bg"],
+                   "borderLeft": f"4px solid {border_hex}"}
+        )
+
+    # ── Tab 1: Festivos ──────────────────────────────────────────────────────
+    _graph_cfg = {"displayModeBar": "hover", "scrollZoom": False,
+                  "modeBarButtonsToRemove": ["lasso2d", "select2d"]}
+
+    def graph_card(fig, height=430):
+        return dbc.Card(
+            dbc.CardBody(
+                dcc.Graph(figure=fig, config=_graph_cfg,
+                          style={"height": f"{height}px"}, responsive=True)
+            ),
+            className="shadow-sm border-0 mb-3",
+            style={"borderRadius": "10px", "backgroundColor": c["card_bg"]}
+        )
+
+    tab_festivos = html.Div([
+        finding_banner("badge_confirmado", "success",
+                       "festivos_titulo", "festivos_metodo", "festivos_hallazgo", "#198754"),
+        dbc.Row([
+            dbc.Col(graph_card(build_event_study_main(c, lang_code)), md=6),
+            dbc.Col(graph_card(build_efectos_individuales(c, lang_code), height=530), md=6),
+        ]),
+        dbc.Row([
+            dbc.Col(graph_card(build_subgrupos(c, lang_code)), md=6),
+            dbc.Col(graph_card(build_timeline_festivos(c, lang_code)), md=6),
+        ]),
+    ], className="pt-3")
+
+    # ── Tab 2: Clima ─────────────────────────────────────────────────────────
+    tab_clima = html.Div([
+        finding_banner("badge_refutado", "danger",
+                       "clima_titulo", "clima_metodo", "clima_hallazgo", TM_ROJO),
+        dbc.Row([
+            dbc.Col(graph_card(build_clima_coeficientes(c, lang_code)), md=6),
+            dbc.Col(graph_card(build_clima_simulacion(c, lang_code)), md=6),
+        ]),
+    ], className="pt-3")
+
+    # ── Tab 3: Ciclovía ──────────────────────────────────────────────────────
+    tab_ciclovia = html.Div([
+        finding_banner("badge_no_confirmado", "warning",
+                       "ciclovia_titulo", "ciclovia_metodo", "ciclovia_hallazgo", TM_AMARILLO),
+        graph_card(build_ciclovia_mapa(c, lang_code), height=480),
+        dbc.Row([
+            dbc.Col(graph_card(build_ciclovia_ratio(c, lang_code)), md=6),
+            dbc.Col(graph_card(build_ciclovia_resultados(c, lang_code)), md=6),
+        ]),
+    ], className="pt-3")
+
+    # ── Tab 4: Conciertos ────────────────────────────────────────────────────
+    tab_campin = html.Div([
+        finding_banner("badge_confirmado", "success",
+                       "campin_titulo", "campin_metodo", "campin_hallazgo", "#198754"),
+        dbc.Row([
+            dbc.Col(graph_card(build_campin_event_study(c, lang_code)), md=7),
+            dbc.Col(graph_card(build_campin_por_evento(c, lang_code), height=430), md=5),
+        ]),
+        dbc.Row([
+            dbc.Col(graph_card(build_campin_spillover(c, lang_code)), md=6),
+            dbc.Col(graph_card(build_campin_fdv_comparacion(c, lang_code)), md=6),
+        ]),
+        graph_card(build_fdv_tipo_dia(c, lang_code), height=380),
+    ], className="pt-3")
+
+    # ── Tab 5: Combustible ───────────────────────────────────────────────────
+    tab_combustible = html.Div([
+        finding_banner("badge_inconcluso", "warning",
+                       "combustible_titulo", "combustible_metodo", "combustible_hallazgo",
+                       TM_AMARILLO),
+        dbc.Row([
+            dbc.Col(graph_card(build_combustible_serie(c, lang_code)), md=7),
+            dbc.Col(graph_card(build_combustible_especificaciones(c, lang_code)), md=5),
+        ]),
+    ], className="pt-3")
+
+    # ── Tab 6: Simulador RF ──────────────────────────────────────────────────
+    zonas = obtener_estaciones_disponibles()
+    ist = _input_style(c)
+
+    formulario_sim = dbc.Card(
+        dbc.CardBody([
+            html.Div([
+                html.H5([html.I(className="bi bi-sliders me-2"), t["input_title"]],
+                        className="fw-bold mb-0", style={"color": c["text_main"]}),
+            ], className="mb-4"),
+            _build_form_group(t["lbl_zona"], dbc.Select(
+                id="pred-zona", options=zonas, value="L",
+                style=ist, className="shadow-sm"
+            ), c),
+            dbc.Row([
+                dbc.Col(_build_form_group(t["lbl_mes"], dbc.Input(
+                    id="pred-mes", type="number", min=1, max=12, value=4,
+                    style=ist, className="shadow-sm"), c), md=4),
+                dbc.Col(_build_form_group(t["lbl_dia"], dbc.Input(
+                    id="pred-dia", type="number", min=1, max=31, value=15,
+                    style=ist, className="shadow-sm"), c), md=4),
+                dbc.Col(_build_form_group(t["lbl_hora"], dbc.Input(
+                    id="pred-hora", type="number", min=0, max=23, value=7,
+                    style=ist, className="shadow-sm"), c), md=4),
+            ]),
+            dbc.Row([
+                dbc.Col(_build_form_group(t["lbl_minuto"], dbc.Input(
+                    id="pred-minuto", type="number", min=0, max=59, value=30,
+                    style=ist, className="shadow-sm"), c), md=6),
+                dbc.Col(_build_form_group(t["lbl_segundo"], dbc.Input(
+                    id="pred-segundo", type="number", min=0, max=59, value=0,
+                    style=ist, className="shadow-sm"), c), md=6),
+            ]),
+            dbc.Row([
+                dbc.Col(_build_form_group(t["lbl_lat"], dbc.Input(
+                    id="pred-lat", type="number", value=4.6580, step=0.0001,
+                    style=ist, className="shadow-sm"), c), md=6),
+                dbc.Col(_build_form_group(t["lbl_lon"], dbc.Input(
+                    id="pred-lon", type="number", value=-74.0940, step=0.0001,
+                    style=ist, className="shadow-sm"), c), md=6),
+            ]),
+            html.Div([
+                dbc.Button([html.I(className="bi bi-play-fill me-2"), t["btn_predecir"]],
+                           id="btn-predecir", color="danger",
+                           className="fw-bold px-4 py-2 shadow-sm me-2",
+                           style={"backgroundColor": TM_ROJO, "borderColor": TM_ROJO,
+                                  "borderRadius": "8px"}),
+                dbc.Button([html.I(className="bi bi-arrow-counterclockwise me-2"), t["btn_limpiar"]],
+                           id="btn-limpiar", color="secondary", outline=True,
+                           className="fw-bold px-4 py-2",
+                           style={"borderRadius": "8px", "color": c["text_main"],
+                                  "borderColor": c["border"]}),
+            ], className="d-flex mt-2")
+        ]),
+        className="shadow-sm border-0 mb-4 kpi-card",
+        style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
+    )
+
+    resultado_sim = dbc.Card(
+        dbc.CardBody([
+            html.Div([
+                html.H5([html.I(className="bi bi-graph-up-arrow me-2"), t["res_titulo"]],
+                        className="fw-bold mb-0", style={"color": c["text_main"]}),
+            ], className="mb-3"),
+            html.Div(id="pred-resultado-container",
+                     children=_build_resultado_esperando(t, c))
+        ]),
+        className="shadow-sm border-0 mb-4 kpi-card",
+        style={"borderRadius": "12px", "backgroundColor": c["card_bg"],
+               "borderTop": f"4px solid {TM_AMARILLO} !important"}
+    )
+
+    mapa_folium_file = os.path.join(BASE_DIR, "assets", "mapa_estaciones.html")
+    mapa_sim_content = (
+        html.Iframe(src="/assets/mapa_estaciones.html", width="100%", height="580px",
+                    style={"border": "none", "borderRadius": "8px"})
+        if os.path.exists(mapa_folium_file)
+        else html.Div(
+            [html.I(className="bi bi-map text-muted mb-2", style={"fontSize": "2.5rem"}),
+             html.Span(t.get("map_box", "Cargando mapa..."))],
+            className="d-flex flex-column align-items-center justify-content-center fw-medium rounded text-center px-4",
+            style={"height": "580px", "backgroundColor": c["chart_box"],
+                   "border": f"2px dashed {c['border']}", "color": c["text_muted"]}
+        )
+    )
+
+    mapa_sim_panel = dbc.Card(
+        dbc.CardBody([
+            html.Div([
+                html.H5(t["pred_map_title"], className="fw-bold mb-0",
+                        style={"color": c["text_main"]}),
+                html.Small(t["pred_map_desc"], style={"color": c["text_muted"]})
+            ], className="mb-3"),
+            mapa_sim_content,
+            dcc.Graph(id="mapa-interactivo-prediccion", figure=go.Figure(),
+                      style={"display": "none"}),
+        ]),
+        className="shadow-sm border-0 mb-4 kpi-card",
+        style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
+    )
+
+    tab_simulador = html.Div([
+        dbc.Row([
+            dbc.Col([formulario_sim, resultado_sim], md=5, lg=4),
+            dbc.Col(mapa_sim_panel, md=7, lg=8),
+        ], className="pt-3")
+    ])
+
+    # ── Ensamble de tabs ─────────────────────────────────────────────────────
+    tabs = dbc.Tabs([
+        dbc.Tab(tab_festivos,     label=t["tab_festivos"],     tab_id="tab-festivos"),
+        dbc.Tab(tab_clima,        label=t["tab_clima"],        tab_id="tab-clima"),
+        dbc.Tab(tab_ciclovia,     label=t["tab_ciclovia"],     tab_id="tab-ciclovia"),
+        dbc.Tab(tab_campin,       label=t["tab_campin"],       tab_id="tab-campin"),
+        dbc.Tab(tab_combustible,  label=t["tab_combustible"],  tab_id="tab-combustible"),
+        dbc.Tab(tab_simulador,    label=t["tab_simulador"],    tab_id="tab-simulador"),
+    ], active_tab="tab-festivos", className="mb-0",
+       style={"borderBottom": f"2px solid {TM_ROJO}"})
+
+    return html.Div([
+        dbc.Row([
+            dbc.Col([
+                dbc.Button(t["btn_back_dash"], href="/", color="secondary", outline=True,
+                           className="fw-bold mb-4 mt-4 shadow-sm",
+                           style={"borderRadius": "8px", "color": c["text_main"],
+                                  "borderColor": c["border"]}),
+                html.H2(t["pred_title"], className="fw-bolder mb-1",
+                        style={"color": c["text_main"]}),
+                html.P(t["pred_desc"], className="mb-3 fs-6",
+                       style={"color": c["text_muted"]})
+            ])
+        ]),
+        tabs,
+    ])
+
+
 def build_page_prediction(t, c):
     """Página 2: Módulo de predicción interactivo con Random Forest."""
 
@@ -792,7 +1070,7 @@ def create_layout(lang_code, theme_mode, pathname="/"):
 
     # Routing
     if pathname == "/prediccion":
-        current_content = build_page_prediction(t, c)
+        current_content = build_page_causal(t, c, lang_code)
     else:
         current_content = build_page_dashboard(t, c)
 
