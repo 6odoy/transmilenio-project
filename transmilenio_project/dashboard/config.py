@@ -8,7 +8,9 @@ import os
 # ──── Rutas de Datos ────
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(BASE_DIR))
-GEOJSON_PATH = os.path.join(PROJECT_ROOT, "data", "processed", "stations_clean.geojson")
+_geojson_artefactos = os.path.join(BASE_DIR, "models", "artefactos", "stations_clean.geojson")
+_geojson_repo = os.path.join(PROJECT_ROOT, "data", "processed", "stations_clean.geojson")
+GEOJSON_PATH = _geojson_artefactos if os.path.exists(_geojson_artefactos) else _geojson_repo
 
 # ──── Identidad Visual Institucional ────
 TM_ROJO = "#C1001F"

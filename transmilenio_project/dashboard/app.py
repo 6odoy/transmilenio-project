@@ -362,9 +362,9 @@ def _load_geojson_stations():
     except Exception:
         pass
 
-    linea_estaciones_file = os.path.join(
-        BASE_DIR, "..", "..", "data", "processed", "linea_estaciones.json"
-    )
+    _le_artefactos = os.path.join(BASE_DIR, "models", "artefactos", "linea_estaciones.json")
+    _le_repo = os.path.join(BASE_DIR, "..", "..", "data", "processed", "linea_estaciones.json")
+    linea_estaciones_file = _le_artefactos if os.path.exists(_le_artefactos) else _le_repo
     linea_estaciones = {}
     try:
         if os.path.exists(linea_estaciones_file):
