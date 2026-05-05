@@ -190,3 +190,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Extra documentation
+CLAUDE.md
+docs/guion_presentacion_inferencia_causal.md
+docs/inferencia_causal.md
+docs/resultados_inferencia_causal.md
