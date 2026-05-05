@@ -1,0 +1,787 @@
+{
+    "7101": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 4820,
+        "total_entradas": 1754392
+    },
+    "8000": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 37700,
+        "total_entradas": 13722741
+    },
+    "2102": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 4052,
+        "total_entradas": 1475048
+    },
+    "2105": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 10571,
+        "total_entradas": 3847751
+    },
+    "40000": {
+        "nombre_linea": "Zona T Ciudad Bolivar",
+        "promedio_diario": 11736,
+        "total_entradas": 4271934
+    },
+    "5005": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 6023,
+        "total_entradas": 2192303
+    },
+    "5002": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 11898,
+        "total_entradas": 4330993
+    },
+    "40003": {
+        "nombre_linea": "Zona T Ciudad Bolivar",
+        "promedio_diario": 5916,
+        "total_entradas": 2153605
+    },
+    "10007": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 9813,
+        "total_entradas": 3571887
+    },
+    "4103": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 2767,
+        "total_entradas": 1007245
+    },
+    "4106": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 2431,
+        "total_entradas": 884963
+    },
+    "7503": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 45992,
+        "total_entradas": 16741017
+    },
+    "7104": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 8678,
+        "total_entradas": 3158778
+    },
+    "7110": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 10774,
+        "total_entradas": 3921596
+    },
+    "7113": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 7674,
+        "total_entradas": 2793211
+    },
+    "2001": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 6713,
+        "total_entradas": 2443482
+    },
+    "10004": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 3082,
+        "total_entradas": 1122002
+    },
+    "4100": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 5463,
+        "total_entradas": 1988684
+    },
+    "10001": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 10715,
+        "total_entradas": 3900358
+    },
+    "7107": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 11477,
+        "total_entradas": 4177576
+    },
+    "10010": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 5358,
+        "total_entradas": 1950166
+    },
+    "7506": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 2484,
+        "total_entradas": 904121
+    },
+    "7000": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 47478,
+        "total_entradas": 17282133
+    },
+    "9111": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 6991,
+        "total_entradas": 475373
+    },
+    "7006": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 6954,
+        "total_entradas": 2531282
+    },
+    "2302": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 11442,
+        "total_entradas": 4164977
+    },
+    "9108": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 1280,
+        "total_entradas": 238115
+    },
+    "9117": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 19225,
+        "total_entradas": 6997724
+    },
+    "12002": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 2423,
+        "total_entradas": 881853
+    },
+    "9114": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 869,
+        "total_entradas": 6950
+    },
+    "6101": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 9698,
+        "total_entradas": 3530099
+    },
+    "7003": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 3517,
+        "total_entradas": 1280036
+    },
+    "9105": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 5342,
+        "total_entradas": 1944372
+    },
+    "4002": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 5489,
+        "total_entradas": 1997909
+    },
+    "6104": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 4134,
+        "total_entradas": 1504688
+    },
+    "9123": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 21121,
+        "total_entradas": 7688129
+    },
+    "9126": {
+        "nombre_linea": "",
+        "promedio_diario": 12597,
+        "total_entradas": 1536879
+    },
+    "9004": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 8843,
+        "total_entradas": 3218937
+    },
+    "9001": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 11420,
+        "total_entradas": 4157013
+    },
+    "6107": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 4713,
+        "total_entradas": 1715635
+    },
+    "5101": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 1702,
+        "total_entradas": 619587
+    },
+    "7200": {
+        "nombre_linea": "",
+        "promedio_diario": 5989,
+        "total_entradas": 2180151
+    },
+    "2204": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 11505,
+        "total_entradas": 4187678
+    },
+    "2201": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 8385,
+        "total_entradas": 3051992
+    },
+    "3002": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 11840,
+        "total_entradas": 4309674
+    },
+    "6000": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 66632,
+        "total_entradas": 24253994
+    },
+    "3005": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 6021,
+        "total_entradas": 2191630
+    },
+    "2103": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 13574,
+        "total_entradas": 4940914
+    },
+    "3014": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 1046,
+        "total_entradas": 380707
+    },
+    "3011": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 5790,
+        "total_entradas": 2107440
+    },
+    "5107": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 7385,
+        "total_entradas": 2688121
+    },
+    "2502": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 10226,
+        "total_entradas": 3722343
+    },
+    "8001": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 2236,
+        "total_entradas": 814022
+    },
+    "4101": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 5692,
+        "total_entradas": 2071715
+    },
+    "40001": {
+        "nombre_linea": "Zona T Ciudad Bolivar",
+        "promedio_diario": 2872,
+        "total_entradas": 1045409
+    },
+    "7102": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 5559,
+        "total_entradas": 2023623
+    },
+    "7504": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 21954,
+        "total_entradas": 7991154
+    },
+    "7108": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 4518,
+        "total_entradas": 1644723
+    },
+    "10002": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 15818,
+        "total_entradas": 5757764
+    },
+    "7105": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 7135,
+        "total_entradas": 2597002
+    },
+    "4104": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 8108,
+        "total_entradas": 2951491
+    },
+    "5000": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 61546,
+        "total_entradas": 22402656
+    },
+    "7111": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 8250,
+        "total_entradas": 3002986
+    },
+    "7001": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 6561,
+        "total_entradas": 2388180
+    },
+    "9103": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 6581,
+        "total_entradas": 2395595
+    },
+    "4107": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 1050,
+        "total_entradas": 382104
+    },
+    "7004": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 7818,
+        "total_entradas": 2845740
+    },
+    "9106": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 3963,
+        "total_entradas": 1442671
+    },
+    "10005": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 4497,
+        "total_entradas": 1636978
+    },
+    "9100": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 7488,
+        "total_entradas": 2725588
+    },
+    "9109": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 3497,
+        "total_entradas": 367189
+    },
+    "7010": {
+        "nombre_linea": "",
+        "promedio_diario": 8931,
+        "total_entradas": 3250798
+    },
+    "7007": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 6951,
+        "total_entradas": 2530021
+    },
+    "10008": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 4742,
+        "total_entradas": 1725931
+    },
+    "9121": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 23734,
+        "total_entradas": 8639033
+    },
+    "6111": {
+        "nombre_linea": "Zona J Eje Ambiental",
+        "promedio_diario": 10330,
+        "total_entradas": 3760019
+    },
+    "6105": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 2576,
+        "total_entradas": 937491
+    },
+    "4000": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 46727,
+        "total_entradas": 17008807
+    },
+    "2303": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 11052,
+        "total_entradas": 4022800
+    },
+    "9115": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 15918,
+        "total_entradas": 2801524
+    },
+    "6102": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 6452,
+        "total_entradas": 2348567
+    },
+    "9002": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 1585,
+        "total_entradas": 577081
+    },
+    "12000": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 2321,
+        "total_entradas": 844764
+    },
+    "12003": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 4297,
+        "total_entradas": 1563945
+    },
+    "6108": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 1833,
+        "total_entradas": 667328
+    },
+    "2300": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 30782,
+        "total_entradas": 11204752
+    },
+    "4003": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 7891,
+        "total_entradas": 2872472
+    },
+    "2202": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 15637,
+        "total_entradas": 5691732
+    },
+    "9005": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 4130,
+        "total_entradas": 1503328
+    },
+    "14004": {
+        "nombre_linea": "Zona J Eje Ambiental",
+        "promedio_diario": 11622,
+        "total_entradas": 4230349
+    },
+    "6001": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 5291,
+        "total_entradas": 1925769
+    },
+    "2205": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 9836,
+        "total_entradas": 3550834
+    },
+    "14001": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 5175,
+        "total_entradas": 1883782
+    },
+    "3000": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 48066,
+        "total_entradas": 17496143
+    },
+    "5105": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 9204,
+        "total_entradas": 3350287
+    },
+    "2104": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 1654,
+        "total_entradas": 9927
+    },
+    "3009": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 6889,
+        "total_entradas": 2507539
+    },
+    "3006": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 9870,
+        "total_entradas": 3592628
+    },
+    "2101": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 21150,
+        "total_entradas": 7698434
+    },
+    "3012": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 7085,
+        "total_entradas": 2578972
+    },
+    "5102": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 4941,
+        "total_entradas": 1798453
+    },
+    "8002": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 2366,
+        "total_entradas": 861298
+    },
+    "3003": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 2256,
+        "total_entradas": 821225
+    },
+    "7201": {
+        "nombre_linea": "",
+        "promedio_diario": 3713,
+        "total_entradas": 1351432
+    },
+    "7106": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 10124,
+        "total_entradas": 3685198
+    },
+    "40002": {
+        "nombre_linea": "Zona T Ciudad Bolivar",
+        "promedio_diario": 2480,
+        "total_entradas": 902577
+    },
+    "7103": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 11343,
+        "total_entradas": 4128827
+    },
+    "7109": {
+        "nombre_linea": "Zona E Nqs Central",
+        "promedio_diario": 9871,
+        "total_entradas": 3592863
+    },
+    "7112": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 8751,
+        "total_entradas": 3185259
+    },
+    "7505": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 9095,
+        "total_entradas": 3310575
+    },
+    "4102": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 8515,
+        "total_entradas": 3099488
+    },
+    "9101": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 2872,
+        "total_entradas": 1042681
+    },
+    "10009": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 13609,
+        "total_entradas": 4953816
+    },
+    "4105": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 3033,
+        "total_entradas": 1104167
+    },
+    "4108": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 6173,
+        "total_entradas": 2246820
+    },
+    "7002": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 7483,
+        "total_entradas": 2723967
+    },
+    "10006": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 16243,
+        "total_entradas": 5912438
+    },
+    "10003": {
+        "nombre_linea": "Zona L Carrera 10",
+        "promedio_diario": 2617,
+        "total_entradas": 952462
+    },
+    "10000": {
+        "nombre_linea": "",
+        "promedio_diario": 28917,
+        "total_entradas": 10525681
+    },
+    "2000": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 60948,
+        "total_entradas": 22185217
+    },
+    "4001": {
+        "nombre_linea": "Zona D Calle 80",
+        "promedio_diario": 3409,
+        "total_entradas": 1240695
+    },
+    "12001": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 3486,
+        "total_entradas": 1269002
+    },
+    "6106": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 5092,
+        "total_entradas": 1853419
+    },
+    "12004": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 5235,
+        "total_entradas": 1905586
+    },
+    "7008": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 4289,
+        "total_entradas": 1561160
+    },
+    "9122": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 14,
+        "total_entradas": 28
+    },
+    "9110": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 23616,
+        "total_entradas": 8596143
+    },
+    "6100": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 6180,
+        "total_entradas": 2249668
+    },
+    "9113": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 6060,
+        "total_entradas": 1969607
+    },
+    "2304": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 12088,
+        "total_entradas": 4400196
+    },
+    "9119": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 23606,
+        "total_entradas": 5382073
+    },
+    "7005": {
+        "nombre_linea": "Zona G Nqs Sur",
+        "promedio_diario": 6320,
+        "total_entradas": 2300449
+    },
+    "9116": {
+        "nombre_linea": "Zona A Caracas",
+        "promedio_diario": 8103,
+        "total_entradas": 1669277
+    },
+    "12007": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 4627,
+        "total_entradas": 1684404
+    },
+    "6109": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 3941,
+        "total_entradas": 1434574
+    },
+    "9104": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 10602,
+        "total_entradas": 3859167
+    },
+    "9107": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 6409,
+        "total_entradas": 2332978
+    },
+    "6103": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 6530,
+        "total_entradas": 2376820
+    },
+    "4004": {
+        "nombre_linea": "",
+        "promedio_diario": 3924,
+        "total_entradas": 1428372
+    },
+    "2200": {
+        "nombre_linea": "Zona B Autonorte",
+        "promedio_diario": 18675,
+        "total_entradas": 6797618
+    },
+    "6002": {
+        "nombre_linea": "Zona K Calle 26",
+        "promedio_diario": 5991,
+        "total_entradas": 2180839
+    },
+    "9000": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 35312,
+        "total_entradas": 12853485
+    },
+    "9003": {
+        "nombre_linea": "Zona H Caracas Sur",
+        "promedio_diario": 1795,
+        "total_entradas": 653254
+    },
+    "1000": {
+        "nombre_linea": "",
+        "promedio_diario": 0,
+        "total_entradas": 0
+    },
+    "3010": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 5602,
+        "total_entradas": 2039071
+    },
+    "3001": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 5291,
+        "total_entradas": 1925757
+    },
+    "5103": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 5624,
+        "total_entradas": 2047106
+    },
+    "3013": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 3672,
+        "total_entradas": 1336533
+    },
+    "3004": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 755,
+        "total_entradas": 274738
+    },
+    "14005": {
+        "nombre_linea": "Zona J Eje Ambiental",
+        "promedio_diario": 11551,
+        "total_entradas": 4204664
+    },
+    "3007": {
+        "nombre_linea": "Zona C Av. Suba",
+        "promedio_diario": 1791,
+        "total_entradas": 651866
+    },
+    "5100": {
+        "nombre_linea": "Zona F Av. Americas",
+        "promedio_diario": 30539,
+        "total_entradas": 11116130
+    },
+    "7507": {
+        "nombre_linea": "",
+        "promedio_diario": 8931,
+        "total_entradas": 3250798
+    },
+    "13002": {
+        "nombre_linea": "",
+        "promedio_diario": 5989,
+        "total_entradas": 2180151
+    },
+    "13003": {
+        "nombre_linea": "",
+        "promedio_diario": 3713,
+        "total_entradas": 1351432
+    },
+    "9118": {
+        "nombre_linea": "",
+        "promedio_diario": 12597,
+        "total_entradas": 1536879
+    },
+    "10500": {
+        "nombre_linea": "",
+        "promedio_diario": 28917,
+        "total_entradas": 10525681
+    }
+}

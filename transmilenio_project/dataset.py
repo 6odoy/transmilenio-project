@@ -114,6 +114,22 @@ def load_stations_geojson(force: bool = False) -> gpd.GeoDataFrame:
     gdf = gpd.read_file(GEOJSON_PATH)
     gdf_clean = gdf[["codigo_nodo_estacion", "nombre_estacion", "geometry"]]
 
+    # Estaciones ausentes en la fuente ArcGIS que sí reportan validaciones
+    _MISSING_STATIONS = [
+        # Danubio abrió nov-2024 y no fue incluida en el dataset de ArcGIS
+        {"codigo_nodo_estacion": 9005, "nombre_estacion": "Danubio",
+         "geometry": gpd.points_from_xy([-74.121111], [4.546111])[0]},
+    ]
+    existing_nodos = set(gdf_clean["codigo_nodo_estacion"].astype(int))
+    rows_to_add = [s for s in _MISSING_STATIONS if s["codigo_nodo_estacion"] not in existing_nodos]
+    if rows_to_add:
+        import pandas as pd
+        extra = gpd.GeoDataFrame(rows_to_add, crs=gdf_clean.crs)
+        gdf_clean = gpd.GeoDataFrame(
+            pd.concat([gdf_clean, extra], ignore_index=True), crs=gdf_clean.crs
+        )
+        logger.info(f"Estaciones manuales añadidas: {[s['nombre_estacion'] for s in rows_to_add]}")
+
     CLEAN_GEOJSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     gdf_clean.to_file(CLEAN_GEOJSON_PATH, driver="GeoJSON")
     logger.info(f"GeoJSON limpio guardado: {CLEAN_GEOJSON_PATH.name} ({len(gdf_clean)} estaciones)")

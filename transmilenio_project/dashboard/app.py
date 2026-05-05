@@ -345,13 +345,13 @@ def build_dynamic_table(t, c):
         style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
     )
 def _load_geojson_stations():
-    """Carga estaciones del GeoJSON. Retorna (lats, lons, names, colors, lines_data).
+    """Carga estaciones del GeoJSON. Retorna (lats, lons, names, colors, lines_data, customdata).
 
     lines_data: dict {linea: {"color": str, "lats": [...], "lons": [...]}}
-    ordenado por latitud descendente para trazar las líneas de norte a sur.
+    customdata: list of [nombre_linea, promedio_diario_fmt, total_entradas_fmt] per station
     """
     from config import GEOJSON_PATH, TM_ROJO
-    lats, lons, names, colors = [], [], [], []
+    lats, lons, names, colors, customdata = [], [], [], [], []
 
     color_file = os.path.join(BASE_DIR, "models", "artefactos", "estacion_color.json")
     estacion_colors = {}
@@ -359,6 +359,15 @@ def _load_geojson_stations():
         if os.path.exists(color_file):
             with open(color_file, "r", encoding="utf-8") as f:
                 estacion_colors = json.load(f)
+    except Exception:
+        pass
+
+    stats_file = os.path.join(BASE_DIR, "models", "artefactos", "estacion_stats.json")
+    estacion_stats = {}
+    try:
+        if os.path.exists(stats_file):
+            with open(stats_file, "r", encoding="utf-8") as f:
+                estacion_stats = json.load(f)
     except Exception:
         pass
 
@@ -392,6 +401,13 @@ def _load_geojson_stations():
                         names.append(props.get("nombre_estacion", "Estación"))
                         color_asignado = estacion_colors.get(nodo, {}).get("color", TM_ROJO)
                         colors.append(color_asignado)
+
+                        s = estacion_stats.get(nodo, {})
+                        prom = s.get("promedio_diario")
+                        total = s.get("total_entradas")
+                        prom_fmt = f"{prom:,}".replace(",", ".") if prom is not None else "N/D"
+                        total_fmt = f"{total:,}".replace(",", ".") if total is not None else "N/D"
+                        customdata.append([s.get("nombre_linea", ""), prom_fmt, total_fmt])
     except Exception:
         pass
 
@@ -412,11 +428,11 @@ def _load_geojson_stations():
             "lons": [p[1] for p in puntos],
         }
 
-    return lats, lons, names, colors, lines_data
+    return lats, lons, names, colors, lines_data, customdata
 
 def _build_station_map(t, c):
     """Construye el mapa de estaciones con líneas suaves por troncal."""
-    lats, lons, names, colors, lines_data = _load_geojson_stations()
+    lats, lons, names, colors, lines_data, customdata = _load_geojson_stations()
 
     if not lats:
         return html.Div(
@@ -457,7 +473,14 @@ def _build_station_map(t, c):
             opacity=0.9,
         ),
         text=names,
-        hovertemplate="<b>%{text}</b><br>Lat: %{lat:.4f}<br>Lon: %{lon:.4f}<extra></extra>",
+        customdata=customdata if customdata else None,
+        hovertemplate=(
+            "<b>%{text}</b><br>"
+            "%{customdata[0]}<br>"
+            "Prom. diario: %{customdata[1]} entradas<br>"
+            "Total: %{customdata[2]} entradas"
+            "<extra></extra>"
+        ) if customdata else "<b>%{text}</b><extra></extra>",
         hoverlabel=dict(
             font_size=12,
             font_family="Inter, sans-serif",

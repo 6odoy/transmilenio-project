@@ -213,6 +213,52 @@ def generate_kpis():
     _write_json_atomic(estacion_color, COLOR_ESTACION_FILE)
     logger.success(f"Mapa de colores guardado en {COLOR_ESTACION_FILE}")
 
+    # ── Estadísticas por Estación (para hover del mapa) ───────────────────────
+    logger.info("Calculando estadísticas por estación para hover del mapa...")
+    estacion_stats_df = (
+        df.group_by("codigo_estacion")
+        .agg([
+            pl.col("entradas").sum().alias("total_entradas"),
+            pl.col("fecha").n_unique().alias("n_dias"),
+        ])
+        .with_columns(
+            (pl.col("total_entradas") / pl.col("n_dias"))
+            .round(0)
+            .cast(pl.Int64)
+            .alias("promedio_diario")
+        )
+        .collect()
+    )
+
+    estacion_stats: dict = {}
+    for row in estacion_stats_df.to_dicts():
+        c_est = str(row["codigo_estacion"])
+        c_lin = estacion_linea_cruce.get(c_est, "")
+        nombre_linea = dim_linea.get(c_lin, f"Línea {c_lin}") if c_lin else ""
+        promedio = int(row["promedio_diario"])
+        total = int(row["total_entradas"])
+        estacion_stats[c_est] = {
+            "nombre_linea": nombre_linea,
+            "promedio_diario": promedio,
+            "total_entradas": total,
+        }
+
+    # Código Parquet → nodo GeoJSON cuando difieren (confirmado por coincidencia de nombre)
+    PARQUET_TO_GEOJSON_NODO = {
+        "7010": "7507",    # Bosa
+        "7200": "13002",   # Tygua - San José
+        "7201": "13003",   # Guatoque - Veraguas
+        "9126": "9118",    # Marly (registrado como "Temporal Marly" en validaciones)
+        "10000": "10500",  # Portal 20 de Julio
+    }
+    for parquet_code, geo_nodo in PARQUET_TO_GEOJSON_NODO.items():
+        if parquet_code in estacion_stats:
+            estacion_stats[geo_nodo] = estacion_stats[parquet_code]
+
+    ESTACION_STATS_FILE = os.path.join(ARTEFACTOS_DIR, "estacion_stats.json")
+    _write_json_atomic(estacion_stats, ESTACION_STATS_FILE)
+    logger.success(f"Estadísticas por estación guardadas en {ESTACION_STATS_FILE} ({len(estacion_stats)} estaciones)")
+
 
 if __name__ == "__main__":
     generate_kpis()
