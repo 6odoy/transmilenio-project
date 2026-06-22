@@ -1,14 +1,14 @@
 import json
+from pathlib import Path
 import re
 import time
-import zipfile
-from pathlib import Path
-from urllib.error import URLError, HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen, urlretrieve
+import zipfile
 
-import polars as pl
 import geopandas as gpd
 from loguru import logger
+import polars as pl
 from tqdm import tqdm
 import typer
 

@@ -105,6 +105,7 @@ LANGUAGES = {
         "tab_ciclovia": "🚲 Ciclovía",
         "tab_campin": "🎵 Conciertos",
         "tab_combustible": "⛽ Combustible",
+        "tab_synth": "🔬 Control Sintético",
         "tab_simulador": "🤖 Simulador RF",
         # ── Badges de resultado ──
         "badge_confirmado": "✅ Hipótesis confirmada",
@@ -127,6 +128,9 @@ LANGUAGES = {
         "combustible_titulo": "Precio de Gasolina y Demanda de TransMilenio",
         "combustible_metodo": "Serie temporal mensual  ·  N = 12  ·  Niveles, log-log y primeras diferencias  ·  VIF precio↔tendencia = 6.2",
         "combustible_hallazgo": "Inconcluso por diseño: variación de precio < 2% en 2025 (N = 12) no permite separar el efecto del precio de la tendencia temporal. Requiere serie histórica 2018–2025.",
+        "synth_titulo": "Control Sintético — Suspensión Troncal Ciudad Bolívar",
+        "synth_metodo": "Control Sintético (Abadie 2010)  ·  11 troncales donantes  ·  SLSQP en símplex  ·  Placebos en espacio  ·  p = 0.000",
+        "synth_hallazgo": "Suspensión del 4-19 oct causó pérdida del −91.8% de la demanda (~750k validaciones). Razón RMSPE = 15.9, superando todos los placebos. El sintético se compone 57.6% Zona H + 34.3% Zona K + 8.1% Zona F.",
         # ── Pies de figura ──
         "fig_event_study": "Coeficientes β_k del event study con IC 95% — k = 0 es el día del festivo, k = −1 es el baseline",
         "fig_efectos_ind": "Efecto de cada festivo vs. mediana del mismo día de semana — ordenado por magnitud",
@@ -204,6 +208,7 @@ LANGUAGES = {
         "tab_ciclovia": "🚲 Ciclovía",
         "tab_campin": "🎵 Concerts",
         "tab_combustible": "⛽ Fuel",
+        "tab_synth": "🔬 Synthetic Control",
         "tab_simulador": "🤖 RF Simulator",
         # ── Result badges ──
         "badge_confirmado": "✅ Hypothesis confirmed",
@@ -226,6 +231,9 @@ LANGUAGES = {
         "combustible_titulo": "Fuel Price and TransMilenio Demand",
         "combustible_metodo": "Monthly time series  ·  N = 12  ·  Levels, log-log and first differences  ·  VIF price↔trend = 6.2",
         "combustible_hallazgo": "Inconclusive by design: < 2% price variation in 2025 (N = 12) cannot separate price effect from time trend. Requires 2018–2025 historical series.",
+        "synth_titulo": "Synthetic Control — Ciudad Bolívar Trunk Suspension",
+        "synth_metodo": "Synthetic Control (Abadie 2010)  ·  11 donor trunk lines  ·  SLSQP on simplex  ·  In-space placebos  ·  p = 0.000",
+        "synth_hallazgo": "Oct 4-19 suspension caused −91.8% demand loss (~750k validations). RMSPE ratio = 15.9, exceeding all placebos. Synthetic composed of 57.6% Zona H + 34.3% Zona K + 8.1% Zona F.",
         # ── Figure captions ──
         "fig_event_study": "Event study β_k coefficients with 95% CI — k = 0 is the holiday day, k = −1 is baseline",
         "fig_efectos_ind": "Each holiday's effect vs. same-weekday median — sorted by magnitude",
@@ -300,6 +308,7 @@ LANGUAGES = {
         "tab_ciclovia": "🚲 Ciclovía",
         "tab_campin": "🎵 Concerti",
         "tab_combustible": "⛽ Carburante",
+        "tab_synth": "🔬 Controllo Sintetico",
         "tab_simulador": "🤖 Simulatore RF",
         # ── Badge risultato ──
         "badge_confirmado": "✅ Ipotesi confermata",
@@ -322,6 +331,9 @@ LANGUAGES = {
         "combustible_titulo": "Prezzo del Carburante e Domanda TransMilenio",
         "combustible_metodo": "Serie temporale mensile  ·  N = 12  ·  Livelli, log-log e prime differenze  ·  VIF prezzo↔trend = 6,2",
         "combustible_hallazgo": "Inconcludente per progettazione: variazione di prezzo < 2% nel 2025 (N = 12) non consente di separare l'effetto del prezzo dal trend temporale. Richiede serie storica 2018–2025.",
+        "synth_titulo": "Controllo Sintetico — Sospensione Troncale Ciudad Bolívar",
+        "synth_metodo": "Controllo Sintetico (Abadie 2010)  ·  11 troncali donatrici  ·  SLSQP su simplesso  ·  Placebos nello spazio  ·  p = 0,000",
+        "synth_hallazgo": "Sospensione 4-19 ott ha causato perdita del -91,8% della domanda (~750k validazioni). Rapporto RMSPE = 15,9, superiore a tutti i placebos. Il sintetico si compone di 57,6% Zona H + 34,3% Zona K + 8,1% Zona F.",
         # ── Didascalie figure ──
         "fig_event_study": "Coefficienti β_k dell'event study con IC 95% — k = 0 è il giorno festivo, k = −1 è il baseline",
         "fig_efectos_ind": "Effetto di ogni festività vs. mediana dello stesso giorno della settimana",

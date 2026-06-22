@@ -30,9 +30,9 @@ Uso desde el dashboard:
 """
 
 import os
-import numpy as np
-import pandas as pd
+
 import joblib
+import pandas as pd
 
 # ==============================================================================
 # RUTAS

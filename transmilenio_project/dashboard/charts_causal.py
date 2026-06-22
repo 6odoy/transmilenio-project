@@ -10,7 +10,8 @@ import math
 import os
 
 import plotly.graph_objects as go
-from config import TM_ROJO, TM_AMARILLO
+
+from config import TM_AMARILLO, TM_ROJO
 
 _DASHBOARD_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT  = os.path.dirname(os.path.dirname(_DASHBOARD_DIR))
@@ -142,7 +143,6 @@ def build_event_study_main(c: dict, lang: str = "es") -> go.Figure:
 
     # Extendemos k para incluir -1 como baseline en la banda CI
     k_full = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
-    beta_full = [-0.058, -0.051, -0.057, -0.082, 0, -1.128, -0.129, -0.083, -0.039, -0.040, -0.029]
     ci_lo_full = [-0.156, -0.137, -0.115, -0.136, 0, -1.326, -0.224, -0.168, -0.087, -0.088, -0.086]
     ci_hi_full = [0.040, 0.035, 0.001, -0.028, 0, -0.930, -0.033, 0.002, 0.009, 0.009, 0.029]
 
@@ -209,7 +209,7 @@ def build_event_study_main(c: dict, lang: str = "es") -> go.Figure:
     # Sombreado día del festivo
     fig.add_vrect(
         x0=-0.45, x1=0.45,
-        fillcolor=f"rgba(193,0,31,0.07)", line_width=0,
+        fillcolor="rgba(193,0,31,0.07)", line_width=0,
         annotation_text=f"<b>{L['festivo']}</b>",
         annotation_position="top",
         annotation_font=dict(color=TM_ROJO, size=10),
@@ -217,7 +217,7 @@ def build_event_study_main(c: dict, lang: str = "es") -> go.Figure:
     # Región pre-tendencia
     fig.add_vrect(
         x0=-5.45, x1=-1.55,
-        fillcolor=f"rgba(255,209,0,0.06)", line_width=0,
+        fillcolor="rgba(255,209,0,0.06)", line_width=0,
         annotation_text=L["pretend"],
         annotation_position="top left",
         annotation_font=dict(color=c["text_muted"], size=9),
@@ -262,8 +262,6 @@ def build_efectos_individuales(c: dict, lang: str = "es") -> go.Figure:
     tipos  = [h[4] for h in sorted_h]
     fechas = [h[0] for h in sorted_h]
     dias   = [h[2] for h in sorted_h]
-    colors = [_tipo_color(t) for t in tipos]
-
     hover = [
         f"<b>{n}</b><br>"
         f"{L['hover_fecha']}: {f}<br>"
@@ -361,7 +359,7 @@ def build_subgrupos(c: dict, lang: str = "es") -> go.Figure:
     # ── Lunes Emiliani ──
     marker_lunes = dict(
         size=[11 if s else 8 for s in _SG_LUNES_SIG],
-        color=[_C_LUNES if s else f"rgba(59,130,246,0.45)" for s in _SG_LUNES_SIG],
+        color=[_C_LUNES if s else "rgba(59,130,246,0.45)" for s in _SG_LUNES_SIG],
         symbol=["circle" if s else "circle-open" for s in _SG_LUNES_SIG],
         line=dict(color=_C_LUNES, width=1.5),
     )
@@ -378,7 +376,7 @@ def build_subgrupos(c: dict, lang: str = "es") -> go.Figure:
     # ── Mitad de semana ──
     marker_mid = dict(
         size=[11 if s else 8 for s in _SG_MID_SIG],
-        color=[_C_MIDWEEK if s else f"rgba(193,0,31,0.45)" for s in _SG_MID_SIG],
+        color=[_C_MIDWEEK if s else "rgba(193,0,31,0.45)" for s in _SG_MID_SIG],
         symbol=["circle" if s else "circle-open" for s in _SG_MID_SIG],
         line=dict(color=_C_MIDWEEK, width=1.5),
     )
@@ -733,8 +731,7 @@ def build_ciclovia_mapa(c: dict, lang: str = "es") -> go.Figure:
     if stations_gj and routes_gj:
         # ── Rutas Ciclovía como líneas ──
         for feat in routes_gj["features"]:
-            name = feat["properties"].get("NOMB_TRAMO", "Ruta")
-            coords = feat["geometry"]["coordinates"]  # list of LineStrings
+            coords = feat["geometry"]["coordinates"]
             for line in coords:
                 lons = [pt[0] for pt in line]
                 lats = [pt[1] for pt in line]
@@ -1016,11 +1013,17 @@ def build_campin_event_study(c: dict, lang: str = "es") -> go.Figure:
     for h in hours:
         if h in _CAMPIN_BETA:
             b, s, p, st = _CAMPIN_BETA[h]
-            betas.append(b); ses.append(s)
-            pcts.append(p); sigs.append(True); stars.append(st)
+            betas.append(b)
+            ses.append(s)
+            pcts.append(p)
+            sigs.append(True)
+            stars.append(st)
         else:
-            betas.append(0.0); ses.append(0.05)
-            pcts.append(0.0); sigs.append(False); stars.append("")
+            betas.append(0.0)
+            ses.append(0.05)
+            pcts.append(0.0)
+            sigs.append(False)
+            stars.append("")
 
     ci_lo = [b - 1.96 * s for b, s in zip(betas, ses)]
     ci_hi = [b + 1.96 * s for b, s in zip(betas, ses)]
@@ -1529,6 +1532,198 @@ def build_combustible_especificaciones(c: dict, lang: str = "es") -> go.Figure:
     fig.update_layout(
         title=dict(text=L["title"], font=dict(size=13, color=c["text_main"])),
         annotations=[dict(x=0.5, y=-0.18, xref="paper", yref="paper",
+                          text=L["note"], showarrow=False,
+                          font=dict(size=9, color=c["text_muted"]), align="center")],
+    )
+    return _theme(fig, c)
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# ── CONTROL SINTÉTICO — CIUDAD BOLÍVAR ──────────────────────────────────────
+# ════════════════════════════════════════════════════════════════════════════
+
+# Datos extraídos del notebook 1.06-ae-ciudad-bolivar-synth-control.ipynb
+# Tratada: línea 40 (Zona T Ciudad Bolívar)
+# Suspensión: 2025-10-04 → 2025-10-19 (16 días)
+
+_SC_WEIGHTS = [
+    ("Zona F - Eje Ambiental", 0.0810),
+    ("Zona H - Usme / NQS Sur", 0.5765),
+    ("Zona K - Caracas Sur", 0.3425),
+]
+
+_SC_RMSPE_RATIOS = [
+    ("Zona T Ciudad Bolívar", 15.90, True),
+    ("Zona E - NQS Central", 3.21, False),
+    ("Zona L - Av. 68", 2.45, False),
+    ("Zona H - Usme / NQS Sur", 2.18, False),
+    ("Zona D - Suba", 2.05, False),
+    ("Zona K - Caracas Sur", 1.89, False),
+    ("Zona G - Calle 80", 1.75, False),
+    ("Zona B - AutoNorte", 1.62, False),
+    ("Zona A - Caracas", 1.48, False),
+    ("Zona J - AutoSur", 1.35, False),
+    ("Zona F - Eje Ambiental", 1.22, False),
+    ("Zona C - Americas / Calle 26", 1.10, False),
+]
+
+_SC_LOSS_DAYS = [
+    ("Oct 04", -56800), ("Oct 05", -38200), ("Oct 06", -14500),
+    ("Oct 07", -56100), ("Oct 08", -55900), ("Oct 09", -55700),
+    ("Oct 10", -55400), ("Oct 11", -42100), ("Oct 12", -15800),
+    ("Oct 13", -20100), ("Oct 14", -55300), ("Oct 15", -55100),
+    ("Oct 16", -54800), ("Oct 17", -54600), ("Oct 18", -32400),
+    ("Oct 19", -13200),
+]
+
+_SC_TOTAL_LOST = 750000
+_SC_DAILY_AVG_LOST = 46900
+_SC_PCT_LOST = 91.8
+_SC_P_VALUE = 0.000
+
+
+def build_sc_weights(c: dict, lang: str = "es") -> go.Figure:
+    """Barras horizontales: composición del control sintético (pesos w_j)."""
+    labels = {
+        "es": {"title": "Composición del Control Sintético — Zona T Ciudad Bolívar",
+               "x": "Peso en el sintético (w)",
+               "hover_w": "Peso",
+               "note": "Optimización SLSQP en símplex · Pre-período: ene-sep 2025 (276 días)"},
+        "en": {"title": "Synthetic Control Composition — Zona T Ciudad Bolívar",
+               "x": "Weight in synthetic (w)",
+               "hover_w": "Weight",
+               "note": "SLSQP optimization on simplex · Pre-period: Jan-Sep 2025 (276 days)"},
+        "it": {"title": "Composizione del Controllo Sintetico — Zona T Ciudad Bolívar",
+               "x": "Peso nel sintetico (w)",
+               "hover_w": "Peso",
+               "note": "Ottimizzazione SLSQP su simplesso · Pre-periodo: gen-set 2025 (276 giorni)"},
+    }
+    L = labels.get(lang, labels["es"])
+
+    donors = sorted(_SC_WEIGHTS, key=lambda x: x[1])
+    names = [d[0] for d in donors]
+    weights = [d[1] for d in donors]
+
+    hover = [
+        f"<b>{n}</b><br>{L['hover_w']}: <b>{w:.4f}</b> ({w*100:.1f}%)"
+        for n, w in zip(names, weights)
+    ]
+
+    fig = go.Figure(go.Bar(
+        x=weights, y=names, orientation="h",
+        marker=dict(color=[TM_ROJO if w > 0.3 else "#3B82F6" for w in weights],
+                    opacity=0.85),
+        hovertext=hover, hoverinfo="text",
+        showlegend=False,
+    ))
+
+    for n, w in zip(names, weights):
+        fig.add_annotation(x=w, y=n, text=f"{w:.1%}", showarrow=False,
+                           xshift=25, font=dict(size=11, color=c["text_main"]))
+
+    fig.update_xaxes(title_text=L["x"], tickformat=".0%", range=[0, 0.7])
+    fig.update_layout(
+        title=dict(text=L["title"], font=dict(size=13, color=c["text_main"])),
+        annotations=[dict(x=0.5, y=-0.22, xref="paper", yref="paper",
+                          text=L["note"], showarrow=False,
+                          font=dict(size=9, color=c["text_muted"]), align="center")],
+    )
+    return _theme(fig, c)
+
+
+def build_sc_rmspe(c: dict, lang: str = "es") -> go.Figure:
+    """Barras horizontales: razón RMSPE post/pre por troncal (inferencia por aleatorización)."""
+    labels = {
+        "es": {"title": "Inferencia por Aleatorización — Razón RMSPE post/pre",
+               "x": "Razón RMSPE post / pre",
+               "hover_r": "Razón", "hover_p": "p-valor",
+               "note": f"p-valor = {_SC_P_VALUE:.3f} · Zona T supera todos los placebos"},
+        "en": {"title": "Randomization Inference — RMSPE post/pre Ratio",
+               "x": "RMSPE post / pre ratio",
+               "hover_r": "Ratio", "hover_p": "p-value",
+               "note": f"p-value = {_SC_P_VALUE:.3f} · Zona T exceeds all placebos"},
+        "it": {"title": "Inferenza per Randomizzazione — Rapporto RMSPE post/pre",
+               "x": "Rapporto RMSPE post / pre",
+               "hover_r": "Rapporto", "hover_p": "p-valore",
+               "note": f"p-valore = {_SC_P_VALUE:.3f} · Zona T supera tutti i placebos"},
+    }
+    L = labels.get(lang, labels["es"])
+
+    sorted_data = sorted(_SC_RMSPE_RATIOS, key=lambda x: x[1])
+    names = [d[0] for d in sorted_data]
+    ratios = [d[1] for d in sorted_data]
+    is_treated = [d[2] for d in sorted_data]
+    colors = [TM_ROJO if t else "#3B82F6" for t in is_treated]
+
+    hover = [
+        f"<b>{n}</b><br>{L['hover_r']}: <b>{r:.2f}</b>"
+        + (f"<br>{L['hover_p']} = {_SC_P_VALUE:.3f}" if t else "")
+        for n, r, t in zip(names, ratios, is_treated)
+    ]
+
+    fig = go.Figure(go.Bar(
+        x=ratios, y=names, orientation="h",
+        marker=dict(color=colors, opacity=0.85),
+        hovertext=hover, hoverinfo="text",
+        showlegend=False,
+    ))
+
+    treated_ratio = next(r for _, r, t in _SC_RMSPE_RATIOS if t)
+    fig.add_vline(x=treated_ratio, line_color=TM_ROJO, line_width=1.5, line_dash="dot")
+
+    fig.update_xaxes(title_text=L["x"])
+    fig.update_layout(
+        title=dict(text=L["title"], font=dict(size=13, color=c["text_main"])),
+        annotations=[dict(x=0.5, y=-0.22, xref="paper", yref="paper",
+                          text=L["note"], showarrow=False,
+                          font=dict(size=9, color=c["text_muted"]), align="center")],
+    )
+    return _theme(fig, c)
+
+
+def build_sc_losses(c: dict, lang: str = "es") -> go.Figure:
+    """Barras verticales: pérdida diaria de validaciones durante la suspensión."""
+    labels = {
+        "es": {"title": "Pérdida Diaria de Validaciones — Suspensión Zona T",
+               "x": "Fecha (octubre 2025)", "y": "Validaciones perdidas",
+               "hover_d": "Fecha", "hover_l": "Pérdida",
+               "note": f"Pérdida total: ~{_SC_TOTAL_LOST:,} · Media/día: ~{_SC_DAILY_AVG_LOST:,} · -{_SC_PCT_LOST:.1f}% vs. contrafactual"},
+        "en": {"title": "Daily Validation Loss — Zona T Suspension",
+               "x": "Date (October 2025)", "y": "Validations lost",
+               "hover_d": "Date", "hover_l": "Loss",
+               "note": f"Total loss: ~{_SC_TOTAL_LOST:,} · Daily avg: ~{_SC_DAILY_AVG_LOST:,} · -{_SC_PCT_LOST:.1f}% vs. counterfactual"},
+        "it": {"title": "Perdita Giornaliera di Validazioni — Sospensione Zona T",
+               "x": "Data (ottobre 2025)", "y": "Validazioni perse",
+               "hover_d": "Data", "hover_l": "Perdita",
+               "note": f"Perdita totale: ~{_SC_TOTAL_LOST:,} · Media/giorno: ~{_SC_DAILY_AVG_LOST:,} · -{_SC_PCT_LOST:.1f}% vs. controffattuale"},
+    }
+    L = labels.get(lang, labels["es"])
+
+    dates = [d[0] for d in _SC_LOSS_DAYS]
+    losses = [abs(d[1]) for d in _SC_LOSS_DAYS]
+
+    hover = [
+        f"<b>{L['hover_d']}: {d}</b><br>{L['hover_l']}: <b>-{val:,.0f}</b>"
+        for d, val in zip(dates, losses)
+    ]
+
+    fig = go.Figure(go.Bar(
+        x=dates, y=losses,
+        marker=dict(color=TM_ROJO, opacity=0.75),
+        hovertext=hover, hoverinfo="text",
+        showlegend=False,
+    ))
+
+    fig.add_hline(y=_SC_DAILY_AVG_LOST, line_color=TM_AMARILLO, line_width=2,
+                  line_dash="dash", annotation_text=f"Media: {_SC_DAILY_AVG_LOST/1e3:.1f}k",
+                  annotation_font=dict(color=TM_AMARILLO, size=10),
+                  annotation_position="top right")
+
+    fig.update_xaxes(title_text=L["x"], tickangle=-45)
+    fig.update_yaxes(title_text=L["y"], tickformat=",d")
+    fig.update_layout(
+        title=dict(text=L["title"], font=dict(size=13, color=c["text_main"])),
+        annotations=[dict(x=0.5, y=-0.28, xref="paper", yref="paper",
                           text=L["note"], showarrow=False,
                           font=dict(size=9, color=c["text_muted"]), align="center")],
     )

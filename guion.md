@@ -2,7 +2,7 @@
 ## ¿Qué mueve la demanda de TransMilenio? Seis estudios causales sobre el sistema BRT más grande de América Latina
 ### 2026 Urban Data Science Summer School — Trento, Italia
 
-**Expositores:** A (Andrea) · B (segundo expositor)
+**Expositores:** A (Andrés) · B (Lis)
 **Duración total:** 20 minutos + preguntas
 **Distribución:** A abre, presenta el sistema y la arquitectura de datos; B lidera la inferencia causal; A cierra con el dashboard y conclusiones.
 
@@ -119,13 +119,13 @@ Detectamos también un efecto spillover: las estaciones a entre 500m y 1km del e
 
 En esos 16 días, las validaciones diarias en esa troncal cayeron de ~58 000 a menos de 600. Una caída del **91,8%**.
 
-Aplicamos el método de control sintético de Abadie, Diamond y Hainmueller (2010). La idea es construir un contrafactual —¿cómo habría evolucionado la demanda si no hubiera habido suspensión?— como combinación ponderada del resto de las 11 troncales, eligiendo los pesos para que el período pre-tratamiento se ajuste lo mejor posible.
+Aplicamos el método de control sintético de Abadie, Diamond y Hainmueller (2010). La idea es construir un contrafactual --¿cómo habría evolucionado la demanda si no hubiera habido suspensión?-- como combinación ponderada del resto de las 11 troncales, eligiendo los pesos para que el período pre-tratamiento (enero-septiembre 2025, 276 días) se ajuste lo mejor posible. El algoritmo SLSQP sobre el símplex seleccionó tres troncales donantes: 57,6% Zona H (Usme/NQS Sur), 34,3% Zona K (Caracas Sur) y 8,1% Zona F (Eje Ambiental). Tiene sentido: son las tres troncales del sur de Bogotá con patrones de movilidad similares a Ciudad Bolívar.
 
 > *Slide: ciudad_bolivar_gap.png*
 
-La brecha entre la troncal observada y su sintético durante el período de suspensión es de ~750 000 validaciones perdidas. Eso equivale a unos 47 000 viajes diarios que no pudieron realizarse o debieron redirigirse —en un sector donde el 78% de la población depende del transporte público.
+La brecha entre la troncal observada y su sintético durante el período de suspensión es de ~750 000 validaciones perdidas. Eso equivale a unos 47 000 viajes diarios que no pudieron realizarse o debieron redirigirse --en un sector donde el 78% de la población depende del transporte público.
 
-La validez del estimador la probamos con **placebos en espacio**: aplicamos el mismo estimador a cada una de las otras 11 troncales, que no recibieron tratamiento. Si el estimador fuera ruido, algunas deberían mostrar brechas comparables. El ratio RMSPE post/pre para Ciudad Bolívar es más de 10 veces el de cualquier placebo. El resultado es estadísticamente inusual.
+La validez del estimador la probamos con **placebos en espacio**: aplicamos el mismo estimador a cada una de las otras 11 troncales, que no recibieron tratamiento. Si el estimador fuera ruido, algunas deberían mostrar brechas comparables. El ratio RMSPE post/pre para Ciudad Bolívar es 15,9 -- casi 5 veces el del placebo más alto (NQS Central, 3,2). El p-valor por permutación es 0,000: la brecha observada es estadísticamente inusual.
 
 ---
 
@@ -133,13 +133,13 @@ La validez del estimador la probamos con **placebos en espacio**: aplicamos el m
 
 > *Slide: captura del dashboard en producción*
 
-**A:** Paralelo al análisis causal construimos una herramienta operativa: un dashboard en Dash/Plotly desplegado en Vercel con soporte multilenguaje —español, inglés e italiano, por las necesidades de este evento.
+**A:** Paralelo al análisis causal construimos una herramienta operativa: un dashboard en Dash/Plotly desplegado en Vercel con soporte multilenguaje --español, inglés e italiano, por las necesidades de este evento.
 
-El dashboard tiene dos páginas. La primera muestra KPIs en tiempo real: demanda diaria promedio, línea de mayor afluencia, hora pico del sistema y estación más congestionada. El mapa interactivo permite explorar la distribución geográfica de las estaciones con métricas por troncal.
+El dashboard tiene dos páginas. La primera muestra KPIs del sistema: demanda diaria promedio, línea de mayor afluencia, hora pico y estación más congestionada. El mapa interactivo permite explorar la distribución geográfica de las 152 estaciones con métricas por troncal.
 
-> *Slide: página del simulador de demanda*
+> *Slide: página de inferencia causal con tabs*
 
-La segunda página es un simulador de demanda. Dada una fecha, hora, zona y coordenadas, un modelo de Random Forest entrenado sobre todo el 2025 predice la afluencia esperada. Este componente está orientado a la planificación de la nueva Troncal Avenida 68, que aún no tiene datos históricos.
+La segunda página integra los seis análisis causales que acabamos de presentar como gráficas interactivas --cada estudio tiene su pestaña con los resultados, coeficientes y figuras que pueden explorarse en vivo. La séptima pestaña es un simulador de demanda: dada una fecha, hora, zona y coordenadas, un modelo de Random Forest entrenado sobre todo el 2025 predice la afluencia esperada. Este componente está orientado a la planificación de la nueva Troncal Avenida 68, que aún no tiene datos históricos.
 
 El stack técnico es completamente reproducible: Polars para el procesamiento, scikit-learn para el modelo, Conda para el entorno, Ruff para calidad de código.
 
@@ -183,22 +183,33 @@ Gracias. Quedamos disponibles para preguntas.
 **Figuras clave a incluir en slides** (todas en `reports/figures/`):
 
 - `synthesis_effect_sizes.png` — panel comparativo de todos los efectos (apertura y cierre)
+- `synthesis_demand_scale.png` — escala comparativa de los choques
 - `event_study_festivos.png` — coeficientes ±5 días alrededor del festivo
+- `efectos_individuales_festivos.png` — barras por festivo
+- `event_study_festivos_subgrupos.png` — lunes Emiliani vs. mitad de semana
+- `clima_panel_fe.png` — scatter precipitación vs. demanda + coeficientes
 - `ciclovia_mapa_tratamiento.png` — mapa de estaciones tratadas vs control
 - `ciclovia_parallel_trends.png` — tendencias paralelas pre-tratamiento
+- `campin_event_study.png` — coeficientes horarios con IC 95%
+- `campin_por_evento.png` — perfiles individuales por concierto
+- `campin_spillover_distancia.png` — efecto por franja de distancia
+- `campin_conciertos_vs_fdv.png` — comparación conciertos vs Festival de Verano
+- `campin_conciertos_vs_grandes_eventos.png` — comparación arena vs estadio
 - `campin_deteccion_eventos.png` — calendario de eventos detectados
-- `campin_conciertos_vs_grandes_eventos.png` — comparación conciertos vs estadio
+- `combustible_precio_demanda.png` — serie dual + scatter + primeras diferencias
 - `ciudad_bolivar_synth.png` — troncal observada vs sintético
-- `ciudad_bolivar_placebos.png` — distribución de placebos
-- `ciudad_bolivar_gap.png` — brecha acumulada
-- `synthesis_demand_scale.png` — escala comparativa de los choques
+- `ciudad_bolivar_gap.png` — brecha acumulada de validaciones perdidas
+- `ciudad_bolivar_perdidas.png` — pérdida diaria durante la suspensión
+- `ciudad_bolivar_placebos.png` — distribución de placebos en espacio
+- `ciudad_bolivar_rmspe_ratio.png` — ratio RMSPE post/pre por troncal
+- `ciudad_bolivar_preperiodo.png` — ajuste pre-tratamiento del sintético
 
 **Transiciones sugeridas:**
 
 - Bloque 1 → 2: "Con esa base limpia, la agenda del día es esta..."
 - Bloque 2 → 3: "Vamos uno a uno. Empezamos con el más limpio metodológicamente..."
 - Bloque 5 → 6: "El más espectacular en magnitud viene ahora..."
-- Bloque 6 → 7: "Ese análisis cierra la parte causal. [A] les muestra cómo lo presentamos en producción."
+- Bloque 6 → 7: "Ese análisis cierra la parte causal. [A] les muestra cómo todo esto se integra en una herramienta interactiva."
 - Bloque 7 → 8: "Y eso nos lleva a las conclusiones..."
 
 **Preguntas anticipadas:**
@@ -207,3 +218,5 @@ Gracias. Quedamos disponibles para preguntas.
 - *¿El modelo Random Forest generaliza a la Av. 68?* — Solo con features de calendario y geografía; la calibración requerirá datos reales de las primeras semanas de operación.
 - *¿Los placebos del sintético son paramétricos o de permutación?* — Permutación en espacio (aplicar el mismo estimador a cada unidad de control); no asumen distribución.
 - *¿La ciclovía tiene efecto en otros modos?* — No lo medimos; ese análisis requeriría datos de bicicletas y peatones, que no están en el registro de validaciones.
+- *¿Por qué el sintético usa solo 3 de 11 troncales?* — La optimización SLSQP minimiza el error pre-tratamiento. Las 8 restantes recibieron peso cero porque no mejoraban el ajuste. Las 3 seleccionadas (Usme, Caracas Sur, Eje Ambiental) comparten patrones de demanda del sur de Bogotá.
+- *¿El dashboard está en producción?* — Sí, desplegado en Vercel como aplicación serverless (WSGI via Gunicorn). Las gráficas causales usan datos hardcoded extraídos de los notebooks, no se recalculan en tiempo real.

@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "transmilenio_project"
 version = "0.0.1"
-description = "later"
+description = "Operational analytics, causal inference, and demand forecasting for Bogotá's TransMilenio mass transit network"
 authors = [
   { name = "Andres Escobar - Lis Sanchez" },
 ]

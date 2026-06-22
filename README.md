@@ -101,11 +101,13 @@ Para una descripción completa de las fuentes externas disponibles para inferenc
 │   └── raw/                   <- ZIPs y CSVs originales (inmutables)
 │
 ├── docs/
-│   └── inferencia_causal.md   <- Mapa completo de análisis causales posibles
+│   ├── inferencia_causal.md   <- Mapa completo de análisis causales posibles
+│   ├── resultados_inferencia_causal.md  <- Resultados de los 6 análisis
+│   └── guion_presentacion_inferencia_causal.md  <- Guión de presentación (largo)
 │
-├── models/                    <- Artefactos de modelos entrenados
+├── notebooks/                 <- Análisis causales (event study, panel FE, DiD, etc.)
 │
-├── notebooks/                 <- Exploración y prototipado
+├── reports/figures/            <- Figuras generadas por notebooks
 │
 ├── tests/
 │   └── test_dataset.py        <- Tests unitarios del pipeline de datos
@@ -113,20 +115,17 @@ Para una descripción completa de las fuentes externas disponibles para inferenc
 ├── transmilenio_project/
 │   ├── config.py              <- Rutas y variables de configuración
 │   ├── dataset.py             <- Pipeline ETL completo (ingesta → Parquet)
-│   ├── features.py            <- Ingeniería de features para modelado
-│   ├── plots.py               <- Visualizaciones reutilizables
-│   ├── modeling/
-│   │   ├── train.py           <- Entrenamiento de modelos
-│   │   └── predict.py        <- Inferencia con modelos entrenados
 │   └── dashboard/
 │       ├── app.py             <- Aplicación Dash principal
 │       ├── config.py          <- Temas, idiomas y rutas del dashboard
+│       ├── charts_causal.py   <- Gráficas interactivas de inferencia causal
 │       ├── generar_kpis.py    <- Cálculo de KPIs y artefactos JSON
 │       ├── models/
-│       │   └── predictor.py   <- Módulo de predicción de afluencia
+│       │   └── predictor.py   <- Módulo de predicción de afluencia (Random Forest)
 │       └── api/
 │           └── index.py       <- Punto de entrada para despliegue en Vercel
 │
+├── guion.md                   <- Guión de exposición (20 min)
 ├── environment.yml            <- Dependencias del entorno conda
 ├── Makefile                   <- Comandos de conveniencia
 └── pyproject.toml             <- Configuración del paquete y herramientas
@@ -148,9 +147,17 @@ make format               # Formatear código con ruff
 
 ## Dashboard
 
-El dashboard tiene dos módulos:
+El dashboard tiene dos páginas:
 
 - **Indicadores Generales** — KPIs del sistema (afluencia diaria, troncal de mayor demanda, hora pico, estación más concurrida), mapa interactivo de estaciones coloreado por línea, y tabla de métricas por troncal.
+- **Inferencia Causal y Simulador** — siete pestañas con los resultados interactivos de cada análisis:
+  1. Festivos (event study)
+  2. Clima (panel FE)
+  3. Ciclovía (DiD)
+  4. Conciertos Campín (event study)
+  5. Combustible (serie temporal)
+  6. Control Sintético (Ciudad Bolívar)
+  7. Simulador RF (predicción de demanda con Random Forest)
 
 Soporta español, inglés e italiano, y tema claro/oscuro.
 
