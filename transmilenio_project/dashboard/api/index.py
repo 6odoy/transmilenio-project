@@ -8,3 +8,6 @@ if _dashboard_dir not in sys.path:
     sys.path.insert(0, _dashboard_dir)
 
 # Vercel espera el objeto WSGI con el nombre 'app'.
+from app import app  # noqa: E402
+
+app = app.server
