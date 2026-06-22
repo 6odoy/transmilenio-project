@@ -32,12 +32,8 @@ from charts_causal import (
     build_timeline_festivos,
 )
 import dash
-from dash import Input, Output, State, callback_context, dcc, html, no_update
+from dash import Input, Output, dcc, html
 import dash_bootstrap_components as dbc
-from models.predictor import (
-    obtener_estaciones_disponibles,
-    predecir_afluencia,
-)
 import plotly.graph_objects as go
 
 from config import BASE_DIR, LANGUAGES, THEMES, TM_AMARILLO, TM_ROJO
@@ -191,28 +187,6 @@ def build_footer(t, c):
 # ==============================================================================
 # HELPERS — FORMULARIO DE PREDICCIÓN
 # ==============================================================================
-def _build_form_group(label_text, input_component, c):
-    """Envuelve un input en un form group estilizado."""
-    return html.Div([
-        html.Label(
-            label_text,
-            className="form-label fw-semibold mb-1",
-            style={"fontSize": "0.8rem", "letterSpacing": "0.5px", "color": c["text_muted"]}
-        ),
-        input_component
-    ], className="mb-3")
-
-
-def _input_style(c):
-    """Estilo compartido para inputs del formulario."""
-    return {
-        "backgroundColor": c["chart_box"],
-        "color": c["text_main"],
-        "border": f"1px solid {c['border']}",
-        "borderRadius": "8px",
-        "fontSize": "0.9rem",
-    }
-
 
 # ==============================================================================
 # CARGA DE KPIs REALES — con caché TTL de 5 minutos
@@ -581,7 +555,7 @@ def build_page_dashboard(t, c):
 
 
 def build_page_causal(t, c, lang_code="es"):
-    """Página 2: Módulo de inferencia causal con resultados por análisis + simulador RF."""
+    """Página 2: Módulo de inferencia causal con resultados por análisis."""
 
     # ── Helpers locales ──────────────────────────────────────────────────────
     def fig_card(src, caption):
@@ -715,114 +689,6 @@ def build_page_causal(t, c, lang_code="es"):
         graph_card(build_sc_rmspe(c, lang_code), height=400),
     ], className="pt-3")
 
-    # ── Tab 7: Simulador RF ──────────────────────────────────────────────────
-    zonas = obtener_estaciones_disponibles()
-    ist = _input_style(c)
-
-    formulario_sim = dbc.Card(
-        dbc.CardBody([
-            html.Div([
-                html.H5([html.I(className="bi bi-sliders me-2"), t["input_title"]],
-                        className="fw-bold mb-0", style={"color": c["text_main"]}),
-            ], className="mb-4"),
-            _build_form_group(t["lbl_zona"], dbc.Select(
-                id="pred-zona", options=zonas, value="L",
-                style=ist, className="shadow-sm"
-            ), c),
-            dbc.Row([
-                dbc.Col(_build_form_group(t["lbl_mes"], dbc.Input(
-                    id="pred-mes", type="number", min=1, max=12, value=4,
-                    style=ist, className="shadow-sm"), c), md=4),
-                dbc.Col(_build_form_group(t["lbl_dia"], dbc.Input(
-                    id="pred-dia", type="number", min=1, max=31, value=15,
-                    style=ist, className="shadow-sm"), c), md=4),
-                dbc.Col(_build_form_group(t["lbl_hora"], dbc.Input(
-                    id="pred-hora", type="number", min=0, max=23, value=7,
-                    style=ist, className="shadow-sm"), c), md=4),
-            ]),
-            dbc.Row([
-                dbc.Col(_build_form_group(t["lbl_minuto"], dbc.Input(
-                    id="pred-minuto", type="number", min=0, max=59, value=30,
-                    style=ist, className="shadow-sm"), c), md=6),
-                dbc.Col(_build_form_group(t["lbl_segundo"], dbc.Input(
-                    id="pred-segundo", type="number", min=0, max=59, value=0,
-                    style=ist, className="shadow-sm"), c), md=6),
-            ]),
-            dbc.Row([
-                dbc.Col(_build_form_group(t["lbl_lat"], dbc.Input(
-                    id="pred-lat", type="number", value=4.6580, step=0.0001,
-                    style=ist, className="shadow-sm"), c), md=6),
-                dbc.Col(_build_form_group(t["lbl_lon"], dbc.Input(
-                    id="pred-lon", type="number", value=-74.0940, step=0.0001,
-                    style=ist, className="shadow-sm"), c), md=6),
-            ]),
-            html.Div([
-                dbc.Button([html.I(className="bi bi-play-fill me-2"), t["btn_predecir"]],
-                           id="btn-predecir", color="danger",
-                           className="fw-bold px-4 py-2 shadow-sm me-2",
-                           style={"backgroundColor": TM_ROJO, "borderColor": TM_ROJO,
-                                  "borderRadius": "8px"}),
-                dbc.Button([html.I(className="bi bi-arrow-counterclockwise me-2"), t["btn_limpiar"]],
-                           id="btn-limpiar", color="secondary", outline=True,
-                           className="fw-bold px-4 py-2",
-                           style={"borderRadius": "8px", "color": c["text_main"],
-                                  "borderColor": c["border"]}),
-            ], className="d-flex mt-2")
-        ]),
-        className="shadow-sm border-0 mb-4 kpi-card",
-        style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
-    )
-
-    resultado_sim = dbc.Card(
-        dbc.CardBody([
-            html.Div([
-                html.H5([html.I(className="bi bi-graph-up-arrow me-2"), t["res_titulo"]],
-                        className="fw-bold mb-0", style={"color": c["text_main"]}),
-            ], className="mb-3"),
-            html.Div(id="pred-resultado-container",
-                     children=_build_resultado_esperando(t, c))
-        ]),
-        className="shadow-sm border-0 mb-4 kpi-card",
-        style={"borderRadius": "12px", "backgroundColor": c["card_bg"],
-               "borderTop": f"4px solid {TM_AMARILLO} !important"}
-    )
-
-    mapa_folium_file = os.path.join(BASE_DIR, "assets", "mapa_estaciones.html")
-    mapa_sim_content = (
-        html.Iframe(src="/assets/mapa_estaciones.html", width="100%", height="580px",
-                    style={"border": "none", "borderRadius": "8px"})
-        if os.path.exists(mapa_folium_file)
-        else html.Div(
-            [html.I(className="bi bi-map text-muted mb-2", style={"fontSize": "2.5rem"}),
-             html.Span(t.get("map_box", "Cargando mapa..."))],
-            className="d-flex flex-column align-items-center justify-content-center fw-medium rounded text-center px-4",
-            style={"height": "580px", "backgroundColor": c["chart_box"],
-                   "border": f"2px dashed {c['border']}", "color": c["text_muted"]}
-        )
-    )
-
-    mapa_sim_panel = dbc.Card(
-        dbc.CardBody([
-            html.Div([
-                html.H5(t["pred_map_title"], className="fw-bold mb-0",
-                        style={"color": c["text_main"]}),
-                html.Small(t["pred_map_desc"], style={"color": c["text_muted"]})
-            ], className="mb-3"),
-            mapa_sim_content,
-            dcc.Graph(id="mapa-interactivo-prediccion", figure=go.Figure(),
-                      style={"display": "none"}),
-        ]),
-        className="shadow-sm border-0 mb-4 kpi-card",
-        style={"borderRadius": "12px", "backgroundColor": c["card_bg"]}
-    )
-
-    tab_simulador = html.Div([
-        dbc.Row([
-            dbc.Col([formulario_sim, resultado_sim], md=5, lg=4),
-            dbc.Col(mapa_sim_panel, md=7, lg=8),
-        ], className="pt-3")
-    ])
-
     # ── Ensamble de tabs ─────────────────────────────────────────────────────
     tabs = dbc.Tabs([
         dbc.Tab(tab_festivos,     label=t["tab_festivos"],     tab_id="tab-festivos"),
@@ -831,7 +697,6 @@ def build_page_causal(t, c, lang_code="es"):
         dbc.Tab(tab_campin,       label=t["tab_campin"],       tab_id="tab-campin"),
         dbc.Tab(tab_combustible,  label=t["tab_combustible"],  tab_id="tab-combustible"),
         dbc.Tab(tab_synth,        label=t["tab_synth"],        tab_id="tab-synth"),
-        dbc.Tab(tab_simulador,    label=t["tab_simulador"],    tab_id="tab-simulador"),
     ], active_tab="tab-festivos", className="mb-0",
        style={"borderBottom": f"2px solid {TM_ROJO}"})
 
@@ -851,65 +716,6 @@ def build_page_causal(t, c, lang_code="es"):
         tabs,
     ])
 
-
-# ==============================================================================
-# HELPERS — RESULTADO DE PREDICCIÓN
-# ==============================================================================
-def _build_resultado_esperando(t, c):
-    """Estado inicial: esperando que el usuario ejecute la predicción."""
-    return html.Div([
-        html.I(className="bi bi-hourglass text-muted mb-2", style={"fontSize": "2rem"}),
-        html.P(t["res_esperando"], className="fw-medium mb-0", style={"color": c["text_muted"]})
-    ], className="d-flex flex-column align-items-center justify-content-center text-center py-4",
-        style={
-            "backgroundColor": c["chart_box"],
-            "borderRadius": "8px",
-            "border": f"1px dashed {c['border']}"
-        }
-    )
-
-
-def _build_resultado_exito(resultado, t, c):
-    """Muestra el resultado exitoso de la predicción."""
-    return html.Div([
-        # Valor principal
-        html.Div([
-            html.Span(
-                t["res_entradas"],
-                className="text-uppercase fw-bold d-block mb-1",
-                style={"fontSize": "0.7rem", "letterSpacing": "0.5px", "color": c["text_muted"]}
-            ),
-            html.H2(
-                f'{resultado["prediccion_entradas"]:,}',
-                className="fw-bolder mb-0",
-                style={"color": TM_ROJO, "fontSize": "2.5rem"}
-            ),
-            html.Small(
-                f'{t["res_normalizada"]}: {resultado["prediccion_normalizada"]}',
-                className="font-monospace",
-                style={"color": c["text_muted"], "fontSize": "0.8rem"}
-            ),
-        ], className="text-center p-4 rounded mb-3", style={
-            "backgroundColor": "rgba(193, 0, 31, 0.04)",
-            "border": f"1px solid {TM_ROJO}30",
-            "borderRadius": "10px"
-        }),
-    ])
-
-
-def _build_resultado_error(resultado, t, c):
-    """Muestra un error en la predicción."""
-    return html.Div([
-        html.I(className="bi bi-exclamation-triangle-fill text-warning mb-2", style={"fontSize": "2rem"}),
-        html.P(t["res_error"], className="fw-bold mb-1", style={"color": c["text_main"]}),
-        html.Small(resultado["mensaje"], className="font-monospace", style={"color": c["text_muted"]})
-    ], className="d-flex flex-column align-items-center justify-content-center text-center py-4",
-        style={
-            "backgroundColor": "rgba(255, 209, 0, 0.06)",
-            "borderRadius": "8px",
-            "border": f"1px solid {TM_AMARILLO}60"
-        }
-    )
 
 
 # ==============================================================================
@@ -965,80 +771,6 @@ def update_dashboard(lang, is_dark, pathname):
     pathname = pathname if pathname else "/"
     return create_layout(lang, theme, pathname)
 
-
-# ==============================================================================
-# CALLBACK — PREDICCIÓN
-# ==============================================================================
-@app.callback(
-    Output("pred-resultado-container", "children"),
-    Input("btn-predecir", "n_clicks"),
-    Input("btn-limpiar", "n_clicks"),
-    State("pred-zona", "value"),
-    State("pred-mes", "value"),
-    State("pred-dia", "value"),
-    State("pred-hora", "value"),
-    State("pred-minuto", "value"),
-    State("pred-segundo", "value"),
-    State("pred-lat", "value"),
-    State("pred-lon", "value"),
-    State("lang-select", "value"),
-    State("theme-switch", "value"),
-    prevent_initial_call=True
-)
-def ejecutar_prediccion(
-    n_pred, n_limpiar,
-    zona, mes, dia, hora, minuto, segundo, lat, lon,
-    lang, is_dark
-):
-    """Callback de predicción: ejecuta el modelo o restablece el panel."""
-    t = LANGUAGES.get(lang or "es", LANGUAGES["es"])
-    c = THEMES["dark" if is_dark else "light"]
-
-    triggered = callback_context.triggered_id
-
-    # ── Restablecer ──
-    if triggered == "btn-limpiar":
-        return _build_resultado_esperando(t, c)
-
-    # ── Predecir ──
-    if triggered == "btn-predecir":
-        try:
-            resultado = predecir_afluencia(
-                mes=int(mes or 4),
-                dia=int(dia or 1),
-                hora=int(hora or 7),
-                minuto=int(minuto or 0),
-                segundo=int(segundo or 0),
-                letra_zona=str(zona or "A"),
-                lat=float(lat or 4.6097),
-                lon=float(lon or -74.0817),
-            )
-
-            if resultado["exito"]:
-                return _build_resultado_exito(resultado, t, c)
-            else:
-                return _build_resultado_error(resultado, t, c)
-
-        except Exception as e:
-            error_result = {
-                "exito": False,
-                "mensaje": f"Error inesperado: {str(e)}"
-            }
-            return _build_resultado_error(error_result, t, c)
-
-    return no_update
-
-@app.callback(
-    [Output("pred-lat", "value"), Output("pred-lon", "value")],
-    Input("mapa-interactivo-prediccion", "clickData"),
-    prevent_initial_call=True
-)
-def update_lat_lon(clickData):
-    """Actualiza los inputs de coordenadas al hacer clic en el mapa."""
-    if clickData and "points" in clickData:
-        point = clickData["points"][0]
-        return point.get("lat", no_update), point.get("lon", no_update)
-    return no_update, no_update
 
 
 # ==============================================================================
