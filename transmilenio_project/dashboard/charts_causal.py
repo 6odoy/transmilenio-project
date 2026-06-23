@@ -16,6 +16,7 @@ from config import TM_AMARILLO, TM_ROJO
 _DASHBOARD_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT  = os.path.dirname(os.path.dirname(_DASHBOARD_DIR))
 _EXT_DIR       = os.path.join(_PROJECT_ROOT, "data", "external")
+_ARTEFACTOS    = os.path.join(_DASHBOARD_DIR, "models", "artefactos")
 
 # ── Paleta semántica ─────────────────────────────────────────────────────────
 _C_SIG      = TM_ROJO       # coeficiente significativo / confirmado
@@ -693,9 +694,9 @@ def build_clima_simulacion(c: dict, lang: str = "es") -> go.Figure:
 def _load_ciclovia_geodata():
     """Carga las capas GeoJSON de la Ciclovía. Retorna None si no existen."""
     try:
-        with open(os.path.join(_EXT_DIR, "stations_ciclovia_tag.geojson")) as f:
+        with open(os.path.join(_ARTEFACTOS, "stations_ciclovia_tag.geojson")) as f:
             stations = json.load(f)
-        with open(os.path.join(_EXT_DIR, "ciclovia_bogota.geojson")) as f:
+        with open(os.path.join(_ARTEFACTOS, "ciclovia_bogota.geojson")) as f:
             routes = json.load(f)
         return stations, routes
     except FileNotFoundError:
