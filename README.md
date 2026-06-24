@@ -165,4 +165,4 @@ Soporta español, inglés e italiano, y tema claro/oscuro.
 
 ## Contexto académico
 
-Proyecto desarrollado en el marco del **2026 Urban Data Science Summer School** celebrado en Trento, Italia
+Proyecto desarrollado en el marco del **2026 Urban Data Science Summer School** celebrado en Pieve Tesino, Italia
